@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: V1g6yjq97NSadNFUZ3bFvom89XNXajpC3EksujJfRJrIOl+SWEK6BiVZwBGk9KmFaaUUGSESo3gVlkUZBRHS1Zmm/An1sxArmUveJ88yjPKM+VbAiSPOauSnjK4lEZ/mblDsgUPo7+IKeHnHDyV6Zg3b7EfRSAC5LqoT81TefJGZJaOinim2k4HO9QcdyRgTfSoXmz29sufuNVozQ2JYHz2TeciKNG5Zdw+Ahu1OvCfYoimbBxlciFFzUtl4qodZWY3eQbr3BIYHnKM9/0LGtSRWAjW2i9iaL867QT3TLqwB03S+FZ9ViCpiDA4odEr6aehLwhdsaanugqA/m5xrSFHe1VfwDSNlB5fOmPCesMnI0aVxazXVMkC9HcC7uwYdDCVg2gduhakC/eITdmnu3+YNQs8BZ24wukRoh73Ui4rC4dJ5MDcFZzLnMd2kUDk+c02gUsNfWVAfpp6G62PIccSzOQMp/kPSJffZfkvvvdCCSzVAIGCn/AjAyBfWtGwBzYzEmEPLz8odLM8fh4twr26/7IccLX03GH/eJlSpGrcpPOrK1C6ewM3ZVA/oCC9OqTUd6qp++/43Biya1kOFiClP0Qat0bzTcCRDYhe7Un/VtUozma5NL9rr3rjrFqtIoB5rDuy4BiFVKGSFbl0LJbs9jZFt9hmeT4gceSrlOP4=
+  app: blooming-lake-35656
+  on:
+    repo: StreakInTheSky/open-toolbox
