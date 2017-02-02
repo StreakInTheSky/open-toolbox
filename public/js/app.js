@@ -6,7 +6,7 @@ var MOCK_DATA = {
 			category: 'home tools',
 			toolName: 'screwdriver',
 			description: 'brand new',
-			rate: 1,
+			rate: 100,
 			availability: [
 				{
 					start: '1486006623722',
@@ -21,7 +21,7 @@ var MOCK_DATA = {
 			category: 'home tools',
 			toolName: 'screwdriver',
 			description: 'brand new',
-			rate: 1,
+			rate: 50,
 			availability: [
 				{
 					start: '1486006623722',
@@ -36,7 +36,7 @@ var MOCK_DATA = {
 			category: 'home tools',
 			toolName: 'screwdriver',
 			description: 'brand new',
-			rate: 1,
+			rate: 25,
 			availability: [
 				{
 					start: '1486006623722',
@@ -56,9 +56,13 @@ function getListings(callbackFn) {
 // to real API later
 function displayListings(data) {
     for (index in data.listings) {
-       $('body').append(
-       	'<h3>' + data.listings[index].toolName + '</h3>' +
-        '<p>' + data.listings[index].description + '</p>');
+       $('ul.results').append(
+       	'<div class="result-listing">' +
+       		'<h3 class="tool-name">' + data.listings[index].toolName + '</h3>' +
+       		'<p class="tool-rate">$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day</p>' +
+       		'<img src="' + data.listings[index].images[0] + '"></img>' +
+        	'<p class="tool-description">' + data.listings[index].description + '</p>'+
+        '</div>');
     }
 }
 

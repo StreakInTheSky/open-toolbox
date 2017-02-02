@@ -1,0 +1,22 @@
+header {
+	background-color: #DDD;
+	width: 100%;
+}
+
+header * {
+	float: left;
+}
+
+aside {
+	background-color: red;
+	float: left;
+	width: 100px;
+}
+
+main {
+	background-color: yellow
+}
+
+footer {
+	background-color: #DDD
+}
