@@ -56,12 +56,16 @@ function getListings(callbackFn) {
 // to real API later
 function displayListings(data) {
     for (index in data.listings) {
-       $('ul.results').append(
+       $('ol.results').append(
        	'<div class="result-listing">' +
-       		'<h3 class="tool-name">' + data.listings[index].toolName + '</h3>' +
-       		'<p class="tool-rate">$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day</p>' +
-       		'<img src="' + data.listings[index].images[0] + '"></img>' +
-        	'<p class="tool-description">' + data.listings[index].description + '</p>'+
+       		'<div class="listing-row-one">' +
+       			'<h3 class="tool-name">' + data.listings[index].toolName + '</h3>' +
+       			'<p class="rate">$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day</p>' +
+       		'</div>' +
+       		'<div class="listing-row-two">' + 
+       			'<img src="' + data.listings[index].images[0] + '"></img>' +
+        		'<p class="description">' + data.listings[index].description + '</p>'+
+        	'</div>' +
         '</div>');
     }
 }
