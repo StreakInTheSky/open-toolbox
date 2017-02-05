@@ -1,0 +1,38 @@
+html {
+	height: 100%;
+}
+
+body {
+	font-family: $font-secondary;
+	margin-top: 50px;
+	font-size: 15px;
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: $font-primary;
+}
+
+h1 {
+	font-size: 1.8em;
+}
+
+h3 {
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+h4 {
+	font-size: 1.2em;
+}
+
+.content {
+	display: flex;
+	min-height: 800px;
+}
+
+.templates {
+	display: none;
+}

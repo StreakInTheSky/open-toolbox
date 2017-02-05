@@ -1,0 +1,28 @@
+aside {
+	background-color: white;
+	padding: 20px 0;
+	border-right: 1px solid black;
+
+	h3, h4 {
+		margin: 0 20px;
+	}
+
+	h3 {
+		margin-bottom: 15px;
+	}
+
+	h4 {
+		margin-bottom: 10px;
+	}
+
+	li {
+		padding: 5px 20px;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			background-color: lightgray;
+			color: green;
+			transition: all 0.3s ease-in-out;
+		}
+	}
+}

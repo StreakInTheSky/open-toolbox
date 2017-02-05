@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "gulp webserver", 
+    "server": "nodemon server.js",
     "test": "mocha"
   },
   "author": "",

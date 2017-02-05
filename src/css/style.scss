@@ -1,3 +1,9 @@
-body {
-	background-color: red;
-}
+@import './base/reset';
+@import './base/typography';
+@import './base/variables';
+@import './base/globals';
+
+@import './partials/header';
+@import './partials/aside';
+@import './partials/main';
+@import './partials/footer';

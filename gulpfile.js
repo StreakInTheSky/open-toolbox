@@ -1,4 +1,4 @@
-// Load plugins
+// Load plugins gulp gulp-sass gulp-autoprefixer gulp-minify-css gulp-jshint gulp-uglify gulp-imagemin gulp-rename gulp-clean gulp-concat gulp-notify gulp-cache gulp-server-livereload
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -70,13 +70,13 @@ gulp.task('default', ['clean'], function() {
 gulp.task('watch', function() {
 
   // Watch .scss files
-  gulp.watch('src/styles/**/*.scss', function(event) {
+  gulp.watch('src/css/**/*.scss', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     gulp.run('styles');
   });
 
   // Watch .js files
-  gulp.watch('src/scripts/resources/*.js', function(event) {
+  gulp.watch('src/js/**/*.js', function(event) {
     console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     gulp.run('scripts');
   });

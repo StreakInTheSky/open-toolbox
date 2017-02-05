@@ -5,7 +5,7 @@ var MOCK_DATA = {
 			userId: 111111,
 			category: 'home tools',
 			toolName: 'screwdriver',
-			description: 'brand new',
+			description: 'Brand new.',
 			rate: 100,
 			availability: [
 				{
@@ -19,8 +19,8 @@ var MOCK_DATA = {
 			id: 'bbbbbbb',
 			userId: 111111,
 			category: 'home tools',
-			toolName: 'screwdriver',
-			description: 'brand new',
+			toolName: 'hammer',
+			description: 'Well worn, but works.',
 			rate: 50,
 			availability: [
 				{
@@ -28,14 +28,14 @@ var MOCK_DATA = {
 					end: '1486006683723'
 				}
 			],
-			images: ['../images/screwdriver1.jpg']
+			images: ['../images/hammer1.jpg']
 		},
 		{
 			id: 'ccccccc',
 			userId: 111111,
-			category: 'home tools',
-			toolName: 'screwdriver',
-			description: 'brand new',
+			category: 'power tools',
+			toolName: 'drill',
+			description: 'Runs strong.',
 			rate: 25,
 			availability: [
 				{
@@ -43,7 +43,7 @@ var MOCK_DATA = {
 					end: '1486006683723'
 				}
 			],
-			images: ['../images/screwdriver1.jpg']
+			images: ['../images/drill1.jpg']
 		}
 	]
 }
@@ -55,19 +55,14 @@ function getListings(callbackFn) {
 // this function stays the same when we connect
 // to real API later
 function displayListings(data) {
-    for (index in data.listings) {
-       $('ol.results').append(
-       	'<div class="result-listing">' +
-       		'<div class="listing-row-one">' +
-       			'<h3 class="tool-name">' + data.listings[index].toolName + '</h3>' +
-       			'<p class="rate">$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day</p>' +
-       		'</div>' +
-       		'<div class="listing-row-two">' + 
-       			'<img src="' + data.listings[index].images[0] + '"></img>' +
-        		'<p class="description">' + data.listings[index].description + '</p>'+
-        	'</div>' +
-        '</div>');
-    }
+  for (index in data.listings) {
+		var listEl = $('.templates .list-items').clone();
+		listEl.find('.tool-name').text(data.listings[index].toolName);
+		listEl.find('.rate').text(((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2));
+		listEl.find('img').attr('src', data.listings[index].images[0]);
+		listEl.find('description').text(data.listings[index].description);
+     $('ol.results').append(listEl);
+  }
 }
 
 // this function can stay the same even when we
