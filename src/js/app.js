@@ -9,6 +9,7 @@ var MOCK_DATA = {
 			toolName: 'screwdriver',
 			description: 'Brand new.',
 			rate: 100,
+			datePosted: '1486006613722',
 			availability: [
 				{
 					start: '1486006623722',
@@ -26,6 +27,7 @@ var MOCK_DATA = {
 			toolName: 'hammer',
 			description: 'Well worn, but works.',
 			rate: 50,
+			datePosted: '1486006613822',
 			availability: [
 				{
 					start: '1486006623722',
@@ -43,6 +45,7 @@ var MOCK_DATA = {
 			toolName: 'drill',
 			description: 'Runs strong.',
 			rate: 25,
+			datePosted: '1486006613922',
 			availability: [
 				{
 					start: '1486006623722',
@@ -60,6 +63,7 @@ var MOCK_DATA = {
 			toolName: 'hammer',
 			description: 'Well worn, but works.',
 			rate: 50,
+			datePosted: '1486006614722',
 			availability: [
 				{
 					start: '1486006623722',
@@ -77,6 +81,7 @@ var MOCK_DATA = {
 			toolName: 'drill',
 			description: 'Runs strong.',
 			rate: 25,
+			datePosted: '1486006614822',
 			availability: [
 				{
 					start: '1486006623722',
