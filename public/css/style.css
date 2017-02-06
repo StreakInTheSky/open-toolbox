@@ -131,11 +131,17 @@ aside {
       background-color: lightgray;
       color: green;
       transition: all 0.3s ease-in-out; }
+  aside .my-listings-buttons {
+    margin-bottom: 20px; }
+    aside .my-listings-buttons li {
+      font-weight: bold; }
 
 main {
   -ms-flex: auto;
       flex: auto;
   padding: 20px; }
+  main h2 {
+    margin-bottom: 15px; }
   main .results {
     display: -ms-flexbox;
     display: flex; }
@@ -149,11 +155,32 @@ main {
         margin-bottom: 10px; }
         main .results .result-listing .listing-row-one .rate {
           font-style: italic; }
-      main .results .result-listing .listing-row-two img {
+      main .results .result-listing .listing-row-two .image-wrapper {
         margin-bottom: 10px;
-        object-fit: cover;
         width: 150px;
-        height: 100px; }
+        height: 100px;
+        overflow: hidden;
+        position: relative; }
+        main .results .result-listing .listing-row-two .image-wrapper img {
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%); }
+      main .results .result-listing .listing-row-two .description {
+        margin-bottom: 10px; }
+      main .results .result-listing .listing-row-two .button-wrapper {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+            justify-content: space-around; }
+        main .results .result-listing .listing-row-two .button-wrapper button {
+          -webkit-appearance: none;
+          border: none;
+          background-color: transparent;
+          padding: 5px;
+          margin: 0 5px;
+          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+          font-size: 0.7em; }
 
 footer {
   -ms-flex-item-align: end;

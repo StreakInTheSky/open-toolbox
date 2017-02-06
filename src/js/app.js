@@ -4,6 +4,8 @@ var MOCK_DATA = {
 			id: 'aaaaaaa',
 			userId: 111111,
 			category: 'home tools',
+			rented: false,
+			disabled: false,
 			toolName: 'screwdriver',
 			description: 'Brand new.',
 			rate: 100,
@@ -19,6 +21,8 @@ var MOCK_DATA = {
 			id: 'bbbbbbb',
 			userId: 111111,
 			category: 'home tools',
+			rented: true,
+			disabled: false,
 			toolName: 'hammer',
 			description: 'Well worn, but works.',
 			rate: 50,
@@ -34,6 +38,42 @@ var MOCK_DATA = {
 			id: 'ccccccc',
 			userId: 111111,
 			category: 'power tools',
+			rented: false,
+			disabled: false,
+			toolName: 'drill',
+			description: 'Runs strong.',
+			rate: 25,
+			availability: [
+				{
+					start: '1486006623722',
+					end: '1486006683723'
+				}
+			],
+			images: ['../images/drill1.jpg']
+		},
+		{
+			id: 'ddddddd',
+			userId: 222222,
+			category: 'home tools',
+			rented: false,
+			disabled: false,
+			toolName: 'hammer',
+			description: 'Well worn, but works.',
+			rate: 50,
+			availability: [
+				{
+					start: '1486006623722',
+					end: '1486006683723'
+				}
+			],
+			images: ['../images/hammer1.jpg']
+		},
+		{
+			id: 'eeeeeee',
+			userId: 222222,
+			category: 'power tools',
+			rented: false,
+			disabled: false,
 			toolName: 'drill',
 			description: 'Runs strong.',
 			rate: 25,
