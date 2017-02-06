@@ -3,12 +3,12 @@ html {
 }
 
 body {
-	font-family: $font-secondary;
 	margin-top: 50px;
-	font-size: 15px;
-	display: flex;
 	height: 100%;
+	display: flex;
 	flex-direction: column;
+	font-size: 15px;
+	font-family: $font-secondary;
 }
 
 h1, h2, h3, h4, h5 {
@@ -17,6 +17,10 @@ h1, h2, h3, h4, h5 {
 
 h1 {
 	font-size: 1.8em;
+}
+
+h2 {
+	font-size: 1.6em;
 }
 
 h3 {

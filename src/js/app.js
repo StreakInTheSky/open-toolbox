@@ -56,9 +56,9 @@ function getListings(callbackFn) {
 // to real API later
 function displayListings(data) {
   for (index in data.listings) {
-		var listEl = $('.templates .list-items').clone();
+		var listEl = $('.templates .result-listing').clone();
 		listEl.find('.tool-name').text(data.listings[index].toolName);
-		listEl.find('.rate').text(((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2));
+		listEl.find('.rate').text('$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
 		listEl.find('img').attr('src', data.listings[index].images[0]);
 		listEl.find('.description').text(data.listings[index].description);
      $('ol.results').append(listEl);

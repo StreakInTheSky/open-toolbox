@@ -1,20 +1,20 @@
 header {
+	position: fixed;
+	height: 50px;
+	width: 100%;
+	top: 0;
+	left: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 50px;
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	background-color: lightgray;
 	box-shadow: 0 0 2px 2px rgba(0,0,0,0.4);
 	padding: 0 100px;
 	box-sizing: border-box;
+	background-color: lightgray;
 
 	h1 {
-		color: gray;
 		flex: 1;
+		color: gray;
 	}
 
 	form {
@@ -27,8 +27,8 @@ header {
 
 		button {
 			position: absolute;
-			right: 0;
 			top: 50%;
+			right: 0;
 			transform: translate(100%, -50%);
 		}
 	}
