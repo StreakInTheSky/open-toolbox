@@ -94,7 +94,7 @@ var MOCK_DATA = {
 }
 
 function getListings(callbackFn) {
-    setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
+  setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
 
 // this function stays the same when we connect
@@ -102,7 +102,7 @@ function getListings(callbackFn) {
 function displayListings(data) {
   for (index in data.listings) {
 		// finds template elements in DOM
-		// and replaces content with content from db 
+		// and replaces content with content from db
 		var listEl = $('.templates .result-listing').clone();
 		listEl.find('.tool-name').text(data.listings[index].toolName);
 		listEl.find('.rate').text('$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
@@ -115,9 +115,9 @@ function displayListings(data) {
 // this function can stay the same even when we
 // are connecting to real API
 function getAndDisplayListings() {
-    getListings(displayListings);
+  getListings(displayListings);
 }
 
 $(function() {
-    getAndDisplayListings();
+  getAndDisplayListings();
 })
