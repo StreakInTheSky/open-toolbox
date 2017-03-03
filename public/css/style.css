@@ -144,7 +144,9 @@ main {
     margin-bottom: 15px; }
   main .results {
     display: -ms-flexbox;
-    display: flex; }
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
     main .results .result-listing {
       margin-right: 10px;
       padding: 10px;

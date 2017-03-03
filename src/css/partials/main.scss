@@ -8,6 +8,7 @@ main {
 
 	.results {
 		display: flex;
+		flex-wrap: wrap;
 
 		.result-listing {
 			margin-right: 10px;
