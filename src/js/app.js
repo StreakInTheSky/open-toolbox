@@ -101,6 +101,8 @@ function getListings(callbackFn) {
 // to real API later
 function displayListings(data) {
   for (index in data.listings) {
+		// finds template elements in DOM
+		// and replaces content with content from db 
 		var listEl = $('.templates .result-listing').clone();
 		listEl.find('.tool-name').text(data.listings[index].toolName);
 		listEl.find('.rate').text('$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
