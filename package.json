@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp webserver", 
+    "dev": "gulp webserver",
     "server": "nodemon server.js",
     "test": "mocha"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.1"
   },
   "devDependencies": {

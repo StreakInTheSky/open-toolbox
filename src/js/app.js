@@ -97,6 +97,12 @@ function getListings(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
 
+function handleEditButton() {
+	$('.results').on('click', '.button-edit', function() {
+		window.location.pathname = '/edit-listing/' + $(this).closest('.result-listing').data('id')
+	})
+}
+
 // this function stays the same when we connect
 // to real API later
 function displayListings(data) {
@@ -108,6 +114,7 @@ function displayListings(data) {
 		listEl.find('.rate').text('$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
 		listEl.find('img').attr('src', data.listings[index].images[0]);
 		listEl.find('.description').text(data.listings[index].description);
+		listEl.attr('data-id', data.listings[index].id);
      $('ol.results').append(listEl);
   }
 }
@@ -116,6 +123,7 @@ function displayListings(data) {
 // are connecting to real API
 function getAndDisplayListings() {
   getListings(displayListings);
+	handleEditButton();
 }
 
 $(function() {
