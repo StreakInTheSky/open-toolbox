@@ -6,30 +6,51 @@
 		<title>Open Toolbox</title>
 	</head>
 	<body>
-		<header>
-			<h1>Open Toolbox</h1>
-			<form action=""><input type="text"><button type="submit">Search</button></form>
-			<a href="/">Home</a>
-		</header>
-		<div class="content">
-			<aside>
-				<h3>My Listings</h3>
-				<ul class="my-listings-buttons">
-					<li>Add New</li>
-				</ul>
-				<h3>Filters</h3>
-				<h4>Profession</h4>
-				<ul>
-					<li>Home Tools</li>
-					<li>Power Tools</li>
-					<li>Gardening</li>
-					<li>Automechanics</li>
-					<li>Carpentry</li>
-				</ul>
-			</aside>
-			<main>
-			<h2>My Listings</h2>
-		<ol class="results"></ol>
+	<header>
+		<h1>Open Toolbox</h1>
+		<form action=""><input type="text"><button type="submit">Search</button></form>
+		<a href="/">Home</a>
+	</header>
+	<div class="content">
+		<main>
+			<form action="">
+				<p>
+					<label for="tool-name">Tool Name</label>
+					<input type="text" name="tool-name" id="tool-name">
+					<label for="rate">Rate: $</label>
+					<input type="text" name="rate" id="rate">
+				</p>
+				<p>
+					<label for="description">description</label>
+					<textarea name="description" rows="8" cols="80"></textarea>
+				</p>
+				<p>
+					<label for="categories">Categories (check all that apply)</label>
+					<input type="checkbox">
+					<label for="">house tools</label>
+					<input type="checkbox">
+					<label for="">power tools</label>
+					<input type="checkbox">
+					<label for="">gardening</label>
+					<input type="checkbox">
+					<label for="">automechanics</label>
+					<input type="checkbox">
+					<label for="">carpentry</label>
+				</p>
+				<p>
+					<label for="availability-start">Start</label>
+					<input type="date" name="availability-start" id="availability-start">
+					<label for="availability-end">End</label>
+					<input type="date" name="availability-end" id="availability-end">
+				</p>
+				<p>
+					<label for="image"></label>
+					<input type="file" name="image" id="image">
+				</p>
+				<p>
+					<input type="submit">
+				</p>
+			</form>
 		</main>
 	</div>
 	<footer>
