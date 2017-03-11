@@ -97,12 +97,6 @@ function getListings(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
 }
 
-function handleEditButton() {
-	$('.results').on('click', '.button-edit', function() {
-		window.location.pathname = '/edit-listing/' + $(this).closest('.result-listing').data('id')
-	})
-}
-
 // this function stays the same when we connect
 // to real API later
 function displayListings(data) {
@@ -119,11 +113,24 @@ function displayListings(data) {
   }
 }
 
+function bindEventHandlers() {
+	$('.edit-form').on('submit', function(event) {
+		event.preventDefault();
+	})
+	$('.results').on('click', '.button-edit', function() {
+		window.location.pathname = '/edit-listing/' + $(this).closest('.result-listing').data('id');
+		// get by id
+		const item = MOCK_DATA.listings[0];
+		$('#tool-name').val(item.toolName);
+		console.log(item);
+	})
+}
+
 // this function can stay the same even when we
 // are connecting to real API
 function getAndDisplayListings() {
-  getListings(displayListings);
-	handleEditButton();
+	getListings(displayListings);
+	bindEventHandlers();
 }
 
 $(function() {
