@@ -3,7 +3,7 @@ var MOCK_DATA = {
 		{
 			id: 'aaaaaaa',
 			userId: 111111,
-			category: 'home tools',
+			category: ['home tools'],
 			rented: false,
 			disabled: false,
 			toolName: 'screwdriver',
@@ -21,7 +21,7 @@ var MOCK_DATA = {
 		{
 			id: 'bbbbbbb',
 			userId: 111111,
-			category: 'home tools',
+			category: ['home tools'],
 			rented: true,
 			disabled: false,
 			toolName: 'hammer',
@@ -39,7 +39,7 @@ var MOCK_DATA = {
 		{
 			id: 'ccccccc',
 			userId: 111111,
-			category: 'power tools',
+			category: ['power tools'],
 			rented: false,
 			disabled: false,
 			toolName: 'drill',
@@ -57,7 +57,7 @@ var MOCK_DATA = {
 		{
 			id: 'ddddddd',
 			userId: 222222,
-			category: 'home tools',
+			category: ['home tools'],
 			rented: false,
 			disabled: false,
 			toolName: 'hammer',
@@ -75,7 +75,7 @@ var MOCK_DATA = {
 		{
 			id: 'eeeeeee',
 			userId: 222222,
-			category: 'power tools',
+			category: ['power tools'],
 			rented: false,
 			disabled: false,
 			toolName: 'drill',
