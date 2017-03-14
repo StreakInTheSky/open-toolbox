@@ -25,23 +25,43 @@ app.get('/edit-listing/:itemId', (req, res) => {
 // END WEB
 
 // API
+// app.get('/tools', (req, res) => {
+// 	Tool
+//     .find()
+//     .limit(10)
+//     .exec()
+//     .then(tools => {
+//       res.json({
+//         tools: tools.map(
+//           (tool) => tool.apiRepr())
+//       });
+//     })
+//     .catch(
+//       err => {
+//         console.error(err);
+//         res.status(500).json({message: 'Internal server error'});
+//     });
+// })
+
 app.get('/tools', (req, res) => {
-	Tool
-    .find()
-    .limit(10)
-    .exec()
-    .then(tools => {
-      res.json({
-        tools: tools.map(
-          (tool) => tool.apiRepr())
-      });
-    })
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
+    const filters = {};
+    const queryableFields = ['category', 'toolName', 'description'];
+    queryableFields.forEach(field => {
+        if (req.query[field]) {
+            filters[field] = req.query[field];
+        }
     });
-})
+    Tool
+        .find(filters)
+        .exec()
+        .then(Tools => res.json(
+            Tools.map(tool => tool.apiRepr())
+        ))
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({message: 'Internal server error'})
+        });
+});
 
 // can also request by ID
 app.get('/tools/:id', (req, res) => {
@@ -54,8 +74,6 @@ app.get('/tools/:id', (req, res) => {
         res.status(500).json({message: 'Internal server error'})
     });
 });
-
-
 
 let server;
 
