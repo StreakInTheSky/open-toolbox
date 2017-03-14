@@ -43,6 +43,20 @@ app.get('/tools', (req, res) => {
     });
 })
 
+// can also request by ID
+app.get('/tools/:id', (req, res) => {
+  Tool
+    .findById(req.params.id)
+    .exec()
+    .then(tool =>res.json(tool.apiRepr()))
+    .catch(err => {
+      console.error(err);
+        res.status(500).json({message: 'Internal server error'})
+    });
+});
+
+
+
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
