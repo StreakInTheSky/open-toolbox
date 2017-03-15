@@ -102,10 +102,10 @@ app.post('/tools', (req, res) => {
 			return false;
 		}
 
-		let compared = req.body.category.map(checkCategories);
+		let checked = req.body.category.map(checkCategories);
 
-		for(let i = 0; i < compared.length; i++) {
-			if (compared[i] === false) {
+		for(let i = 0; i < checked.length; i++) {
+			if (checked[i] === false) {
 				const message = `\`${req.body.category[i]}\` is not a valid category`
 				console.error(message);
 				return res.status(400).send(message);
