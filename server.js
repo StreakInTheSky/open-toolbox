@@ -11,7 +11,7 @@ app.use(cookieParser());
 mongoose.Promise = global.Promise;
 
 const {PORT, DATABASE_URL} = require('./config');
-const {Tool} = require('./model');
+const {Tool, Category} = require('./model');
 
 // WEB
 app.get('/', (req, res) => {
@@ -45,7 +45,7 @@ app.get('/edit-listing/:itemId', (req, res) => {
 
 app.get('/tools', (req, res) => {
     const filters = {};
-    const queryableFields = ['category', 'toolName', 'description'];
+    const queryableFields = ['category', 'toolName'];
     queryableFields.forEach(field => {
         if (req.query[field]) {
             filters[field] = req.query[field];
@@ -72,6 +72,62 @@ app.get('/tools/:id', (req, res) => {
     .catch(err => {
       console.error(err);
         res.status(500).json({message: 'Internal server error'})
+    });
+});
+
+app.post('/tools', (req, res) => {
+	//gets list of categories from categories db
+	Category.find().exec().then(categories => { postTool(categories); })
+
+	//posts new document into tools db
+ 	function postTool(categories) {
+		const requiredFields = ['category', 'toolName', 'description', 'rate'];
+
+		for (let i=0; i<requiredFields.length; i++) {
+		  const field = requiredFields[i];
+		  if (!(field in req.body)) {
+		    const message = `Missing \`${field}\` in request body`
+		    console.error(message);
+		    return res.status(400).send(message);
+		  }
+		}
+
+		//checks if entered categories are valid
+		function checkCategories(entry) {
+			for(let i=0; i < categories.length; i++) {
+				if (categories[i].category === entry) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		let compared = req.body.category.map(checkCategories);
+
+		for(let i = 0; i < compared.length; i++) {
+			if (compared[i] === false) {
+				const message = `\`${req.body.category[i]}\` is not a valid category`
+				console.error(message);
+				return res.status(400).send(message);
+			}
+		}
+	}
+  Tool
+    .create({
+			category: req.body.category,
+			rented: false,
+			disabled: false,
+			toolName: req.body.toolName,
+			description: req.body.description,
+			rate: req.body.rate,
+			datePosted: Date(),
+			availability: req.body.availability,
+			images: req.body.images})
+    .then(
+      tool => res.status(201).json(tool.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({message: 'Internal server error'});
     });
 });
 
