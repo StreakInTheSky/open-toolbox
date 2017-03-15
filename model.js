@@ -46,6 +46,18 @@ toolSchema.methods.apiRepr = function() {
   }
 }
 
-const Tool = mongoose.model('Tool', toolSchema);
+const categorySchema = mongoose.Schema({
+	category: String
+})
 
-module.exports = {Tool};
+categorySchema.methods.apiRepr = function() {
+	return {
+		id: this._id,
+		category: this.category
+	}
+}
+
+const Tool = mongoose.model('Tool', toolSchema);
+const Category = mongoose.model('Category', categorySchema);
+
+module.exports = {Tool, Category};
