@@ -131,6 +131,32 @@ app.post('/tools', (req, res) => {
     });
 });
 
+app.put('/tools/:id', (req, res) => {
+
+  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+    const message = (
+      `Request path id (${req.params.id}) and request body id ` +
+      `(${req.body.id}) must match`);
+    console.error(message);
+    res.status(400).json({message: message});
+  }
+
+  const toUpdate = {};
+  const updateableFields = ['toolName', 'categories', 'description', 'rate', 'images', 'disabled', 'availability'];
+
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  Tool
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .exec()
+    .then(tool => res.status(204).end())
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
