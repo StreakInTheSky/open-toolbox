@@ -43,7 +43,7 @@ app.get('/edit-listing/:itemId', (req, res) => {
 //     });
 // })
 
-function checkCategories(req, res, categories) {
+function categoryCheckIsValid(req, res, categories) {
 	function lookupCategories(entry) {
 		for(let i=0; i < categories.length; i++) {
 			if (categories[i].category === entry) {
@@ -59,9 +59,11 @@ function checkCategories(req, res, categories) {
 		if (checked[i] === false) {
 			const message = `\`${req.body.category[i]}\` is not a valid category`
 			console.error(message);
-			return res.status(400).send(message);
+		 	res.status(400).send(message);
+			return false;
 		}
 	}
+	return true;
 }
 
 app.get('/tools', (req, res) => {
@@ -113,36 +115,40 @@ app.post('/tools', (req, res) => {
 		  }
 		}
 
-		if (req.body.category) {
-			checkCategories(req, res, categories);
+		if (req.body.category && categoryCheckIsValid(req, res, categories)){
+			return executePost(req, res);
 		}
-
 	}
-  Tool
-    .create({
-			category: req.body.category,
-			rented: false,
-			disabled: false,
-			toolName: req.body.toolName,
-			description: req.body.description,
-			rate: req.body.rate,
-			datePosted: Date(),
-			availability: req.body.availability,
-			images: req.body.images})
-    .then(
-      tool => res.status(201).json(tool.apiRepr()))
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({message: 'Internal server error'});
-    });
+
+	function executePost(req, res) {
+		Tool
+			.create({
+				category: req.body.category,
+				rented: false,
+				disabled: false,
+				toolName: req.body.toolName,
+				description: req.body.description,
+				rate: req.body.rate,
+				datePosted: Date(),
+				availability: req.body.availability,
+				images: req.body.images})
+			.then( tool => {
+						console.log("Success!")
+						res.status(201).json(tool.apiRepr())
+					})
+			.catch(err => {
+				console.error(err);
+				res.status(500).json({message: 'Internal server error'});
+			});
+	}
 });
 
 app.put('/tools/:id', (req, res) => {
 	Category.find().exec().then(categories => { putInfo(categories); })
 
-	const toUpdate = {};
+	let toUpdate = {};
 
-	function putInfo(categories){
+	function putInfo(categories) {
 		if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
 	    const message = (
 	      `Request path id (${req.params.id}) and request body id ` +
@@ -159,16 +165,22 @@ app.put('/tools/:id', (req, res) => {
 	    }
 	  });
 
-		if (req.body.category) {
-			checkCategories(req, res, categories);
+		if (req.body.category && categoryCheckIsValid(req, res, categories)){
+			return executePut(req, res);
 		}
+
+		const message = `\`${req.body.category[i]}\` is not a valid category`
+		console.error(message);
+		return res.status(400).send(message);
 	}
 
-  Tool
-    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
-    .exec()
-    .then(tool => res.status(204).end())
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+	function executePut(req, res) {
+	  Tool
+	    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+	    .exec()
+	    .then(tool => res.status(204).end())
+	    .catch(err => res.status(500).json({message: 'Internal server error'}));
+	}
 });
 
 app.delete('/tools/:id', (req, res) => {
