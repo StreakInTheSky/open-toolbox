@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const toolSchema = mongoose.Schema({
 	category: [{type: String, required: true}],
-	rented: {type: String, required: true},
+	rented: {type: Boolean, required: true},
 	disabled: {type: Boolean, required: true},
 	toolName: {type: String, required: true},
 	description: {type: String, required: true},
