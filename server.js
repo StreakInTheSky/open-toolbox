@@ -43,6 +43,27 @@ app.get('/edit-listing/:itemId', (req, res) => {
 //     });
 // })
 
+function checkCategories(req, res, categories) {
+	function lookupCategories(entry) {
+		for(let i=0; i < categories.length; i++) {
+			if (categories[i].category === entry) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	let checked = req.body.category.map(lookupCategories);
+
+	for(let i = 0; i < checked.length; i++) {
+		if (checked[i] === false) {
+			const message = `\`${req.body.category[i]}\` is not a valid category`
+			console.error(message);
+			return res.status(400).send(message);
+		}
+	}
+}
+
 app.get('/tools', (req, res) => {
     const filters = {};
     const queryableFields = ['category', 'toolName'];
@@ -92,25 +113,10 @@ app.post('/tools', (req, res) => {
 		  }
 		}
 
-		//checks if entered categories are valid
-		function checkCategories(entry) {
-			for(let i=0; i < categories.length; i++) {
-				if (categories[i].category === entry) {
-					return true;
-				}
-			}
-			return false;
+		if (req.body.category) {
+			checkCategories(req, res, categories);
 		}
 
-		let checked = req.body.category.map(checkCategories);
-
-		for(let i = 0; i < checked.length; i++) {
-			if (checked[i] === false) {
-				const message = `\`${req.body.category[i]}\` is not a valid category`
-				console.error(message);
-				return res.status(400).send(message);
-			}
-		}
 	}
   Tool
     .create({
@@ -132,23 +138,31 @@ app.post('/tools', (req, res) => {
 });
 
 app.put('/tools/:id', (req, res) => {
+	Category.find().exec().then(categories => { putInfo(categories); })
 
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    const message = (
-      `Request path id (${req.params.id}) and request body id ` +
-      `(${req.body.id}) must match`);
-    console.error(message);
-    res.status(400).json({message: message});
-  }
+	const toUpdate = {};
 
-  const toUpdate = {};
-  const updateableFields = ['toolName', 'categories', 'description', 'rate', 'images', 'disabled', 'availability'];
+	function putInfo(categories){
+		if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
+	    const message = (
+	      `Request path id (${req.params.id}) and request body id ` +
+	      `(${req.body.id}) must match`);
+	    console.error(message);
+	    res.status(400).json({message: message});
+	  }
 
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      toUpdate[field] = req.body[field];
-    }
-  });
+	  const updateableFields = ['toolName', 'categories', 'description', 'rate', 'images', 'disabled', 'availability'];
+
+	  updateableFields.forEach(field => {
+	    if (field in req.body) {
+	      toUpdate[field] = req.body[field];
+	    }
+	  });
+
+		if (req.body.category) {
+			checkCategories(req, res, categories);
+		}
+	}
 
   Tool
     .findByIdAndUpdate(req.params.id, {$set: toUpdate})
