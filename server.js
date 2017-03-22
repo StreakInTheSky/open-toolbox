@@ -200,7 +200,7 @@ function runServer(databaseUrl=DATABASE_URL, port=PORT) {
         return reject(err);
       }
 
-      app.listen(port, () => {
+      server = app.listen(port, () => {
         console.log(`Your app is listening on port ${port}`);
         resolve();
       })
