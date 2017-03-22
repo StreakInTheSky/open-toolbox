@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp webserver",
     "server": "nodemon server.js",
-    "test": "mocha test"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
