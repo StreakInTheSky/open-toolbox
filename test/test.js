@@ -63,13 +63,27 @@ function generateTool() {
 }
 
 function seedToolData(number) {
-	let tools = [];
+  console.info('seeding tool data');
+	return new Promise((success, failure) => {
+    let tools = [];
 
-	for (let i = 0; i < number; i++) {
-		tools.push(generateTool());
-	}
+    for (let i = 0; i < number; i++) {
+      tools.push(generateTool());
+    }
 
-	return tools;
+    Tool.insertMany(tools).then(() => {
+      success()
+    });
+  });
+}
+
+function seedCatagoryData() {
+  return new Promise((catdog, bacteria) => {
+    categories = [{category: "home tools"}, {category: "power tools"}, {category: "automechanics"}, {category: "gardening"}, {category: "carpentry"}, {category: "metal-working"}, {category: "plumbing"}];
+    Category.insertMany(categories).then(() => {
+      catdog()
+    });
+  })
 }
 
 function tearDownDb() {
@@ -88,10 +102,12 @@ describe('Open-toolbox API resource', function() {
     return runServer(TEST_DATABASE_URL);
   });
 
-  beforeEach(function() {
-		categories = [{category: "home tools"}, {category: "power tools"}, {category: "automechanics"}, {category: "gardening"}, {category: "carpentry"}, {category: "metal-working"}, {category: "plumbing"}];
-    Tool.insertMany(seedToolData(20));
-		Category.insertMany(categories);
+  beforeEach(function(done) {
+    const categoryPromise = seedCatagoryData();
+    const toolPromise = seedToolData(20);
+    Promise.all([categoryPromise, toolPromise]).then(() => {
+      done()
+    });
   });
 
   afterEach(function() {
@@ -102,13 +118,73 @@ describe('Open-toolbox API resource', function() {
     return closeServer();
   })
 
-	describe('Test', function() {
-		it('should give status 200', function() {
-			return chai.request(app)
-				.get('/tools')
-				.then(function(res) {
-					res.should.have.status(200);
-				});
-		});
-	});
+	// describe('GET endpoint', function() {
+	// 	it('should get all tool listings', function() {
+	// 		return chai.request(app)
+	// 			.get('/tools')
+	// 			.then(function(res) {
+	// 				res.should.have.status(200);
+	// 			});
+	// 	});
+	// });
+
+	describe('GET endpoint', function() {
+
+    it('should return all tool listings', function() {
+      // strategy:
+      //    1. get back all tools returned by GET request to `/tools`
+      //    2. prove res has right status, data type
+      //    3. prove the number of lisitngs we got back is equal to number
+      //       in db.
+      //
+      // need to have access to mutate and access `res` across
+      // `.then()` calls below, so declare it here so can modify in place
+      let res;
+      return chai.request(app)
+        .get('/tools')
+        .then(function(_res) {
+          // so subsequent .then blocks can access resp obj.
+          res = _res;
+          res.should.have.status(200);
+          // otherwise our db seeding didn't work
+          res.body.should.have.length.of.at.least(1);
+          return Tool.count();
+        })
+        .then(function(count) {
+          res.body.should.have.length.of(count);
+        });
+    });
+
+
+    it('should return tool listings with right fields', function() {
+      // Strategy: Get back all tools, and ensure they have expected keys
+
+      let resTool;
+      return chai.request(app)
+        .get('/tools')
+        .then(function(res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body.should.have.length.of.at.least(1);
+
+          res.body.forEach(function(tool) {
+            tool.should.be.a('object');
+            tool.should.include.keys("id", "category", "rented", "disabled", "toolName", "description", "rate", "datePosted", "availability", "images")
+          });
+          resTool = res.body[0];
+          return Tool.findById(resTool.id);
+        })
+        .then(function(tool) {
+
+          resTool.id.should.equal(tool.id);
+        //   resTool.category.should.equal(tool.name);
+        //   resTool.cuisine.should.equal(tool.cuisine);
+        //   resTool.borough.should.equal(tool.borough);
+        //   resTool.address.should.contain(tool.address.building);
+        //
+        //   resTool.grade.should.equal(tool.grade);
+        // });
+    });
+  });
 });
