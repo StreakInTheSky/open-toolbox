@@ -30,7 +30,7 @@ function generateCategories() {
 	for (var i=0; i < randomNumber; i++) {
 		randomCategories.push(pickCategory());
 	}
-
+	// console.log(randomCategories);
 	return randomCategories;
 }
 
@@ -172,19 +172,29 @@ describe('Open-toolbox API resource', function() {
             tool.should.be.a('object');
             tool.should.include.keys("id", "category", "rented", "disabled", "toolName", "description", "rate", "datePosted", "availability", "images")
           });
+
           resTool = res.body[0];
           return Tool.findById(resTool.id);
         })
         .then(function(tool) {
-
           resTool.id.should.equal(tool.id);
-        //   resTool.category.should.equal(tool.name);
-        //   resTool.cuisine.should.equal(tool.cuisine);
-        //   resTool.borough.should.equal(tool.borough);
-        //   resTool.address.should.contain(tool.address.building);
-        //
-        //   resTool.grade.should.equal(tool.grade);
-        // });
+					for (let i = 0; i < tool.length; i++) {
+						resTool.category[i].should.equal(tool.category[i]);
+					}
+          resTool.rented.should.equal(tool.rented);
+          resTool.disabled.should.equal(tool.disabled);
+          resTool.toolName.should.contain(tool.toolName);
+          resTool.description.should.equal(tool.description);
+          resTool.rate.should.equal(tool.rate);
+          Date.parse(resTool.datePosted).should.equal(Date.parse(tool.datePosted));
+					for (let i = 0; i < tool.availability.lenth; i++) {
+						Date.parse(resTool.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
+						Date.parse(resTool.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
+					}
+					for (let i = 0; i < tool.images.length; i++) {
+						resTool.images[i].should.equal(tool.images[i]);
+					}
+        });
     });
   });
 });
