@@ -43,6 +43,20 @@ app.get('/edit-listing/:itemId', (req, res) => {
 //     });
 // })
 
+app.get('/categories', (req, res) => {
+	Category
+    .find()
+    .exec()
+    .then(Categories => res.json(
+        Categories.map(category => category.apiRepr())
+    ))
+    .catch(
+      err => {
+        console.error(err);
+        res.status(500).json({message: 'Internal server error'});
+    });
+})
+
 function categoryCheckIsValid(req, res, categories) {
 	function lookupCategories(entry) {
 		for(let i=0; i < categories.length; i++) {
