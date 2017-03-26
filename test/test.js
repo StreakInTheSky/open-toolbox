@@ -231,22 +231,69 @@ describe('Open-toolbox API resource', function() {
 	        })
 					.then(function(tool) {
 						for (let i = 0; i < tool.length; i++) {
-							newTool.category[i].should.equal(tool.category[i]);
+							tool.category[i].should.equal(newTool.category[i]);
 						}
-	          newTool.rented.should.equal(false);
-	          newTool.disabled.should.equal(false);
-	          newTool.toolName.should.contain(tool.toolName);
-	          newTool.description.should.equal(tool.description);
-	          newTool.rate.should.equal(tool.rate);
-	          // Date.parse(newTool.datePosted).should.equal(Date.parse(tool.datePosted));
+	          tool.rented.should.equal(false);
+	          tool.disabled.should.equal(false);
+	          tool.toolName.should.contain(newTool.toolName);
+	          tool.description.should.equal(newTool.description);
+	          tool.rate.should.equal(newTool.rate);
+	          // Date.parse(newTool.datePosted).should.equal(Date.parse(newTool.datePosted));
 						for (let i = 0; i < tool.availability.lenth; i++) {
-							Date.parse(newTool.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
-							Date.parse(newTool.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
+							Date.parse(tool.availability[i].start).should.equal(Date.parse(newTool.availability[i].start));
+							Date.parse(tool.availability[i].end).should.equal(Date.parse(newTool.availability[i].end));
 						}
 						for (let i = 0; i < tool.images.length; i++) {
-							newTool.images[i].should.equal(tool.images[i]);
+							tool.images[i].should.equal(newTool.images[i]);
 						}
 	        });
 	    });
 	  });
+    describe('PUT endpoint', function() {
+
+    // strategy:
+    //  1. Get an existing tool listing from db
+    //  2. Make a PUT request to update that listing
+    //  3. Prove listing returned by request contains data we sent
+    //  4. Prove tool listing in db is correctly updated
+    it('should update fields you send over', function() {
+      const updateData = generateTool();
+
+      return Tool
+        .findOne()
+        .exec()
+        .then(function(tool) {
+          updateData.id = tool.id;
+
+          // make request then inspect it to make sure it reflects
+          // data we sent
+          return chai.request(app)
+            .put(`/tools/${tool.id}`)
+            .send(updateData);
+        })
+        .then(function(res) {
+          res.should.have.status(204);
+
+          return Tool.findById(updateData.id).exec();
+        })
+        .then(function(tool) {
+          for (let i = 0; i < tool.length; i++) {
+            updateData.category[i].should.equal(tool.category[i]);
+          }
+          updateData.rented.should.equal(tool.rented);
+          updateData.disabled.should.equal(tool.disabled);
+          updateData.toolName.should.contain(tool.toolName);
+          updateData.description.should.equal(tool.description);
+          updateData.rate.should.equal(tool.rate);
+          // Date.parse(updateData.datePosted).should.equal(Date.parse(tool.datePosted));
+          for (let i = 0; i < tool.availability.lenth; i++) {
+            Date.parse(updateData.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
+            Date.parse(updateData.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
+          }
+          for (let i = 0; i < tool.images.length; i++) {
+            updateData.images[i].should.equal(tool.images[i]);
+          }
+        });
+      });
+  });
 });
