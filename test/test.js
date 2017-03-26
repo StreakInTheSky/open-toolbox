@@ -249,51 +249,83 @@ describe('Open-toolbox API resource', function() {
 	        });
 	    });
 	  });
+
     describe('PUT endpoint', function() {
 
-    // strategy:
-    //  1. Get an existing tool listing from db
-    //  2. Make a PUT request to update that listing
-    //  3. Prove listing returned by request contains data we sent
-    //  4. Prove tool listing in db is correctly updated
-    it('should update fields you send over', function() {
-      const updateData = generateTool();
+      // strategy:
+      //  1. Get an existing tool listing from db
+      //  2. Make a PUT request to update that listing
+      //  3. Prove listing returned by request contains data we sent
+      //  4. Prove tool listing in db is correctly updated
+      it('should update fields you send over', function() {
+        const updateData = generateTool();
 
-      return Tool
-        .findOne()
-        .exec()
-        .then(function(tool) {
-          updateData.id = tool.id;
+        return Tool
+          .findOne()
+          .exec()
+          .then(function(tool) {
+            updateData.id = tool.id;
 
-          // make request then inspect it to make sure it reflects
-          // data we sent
-          return chai.request(app)
-            .put(`/tools/${tool.id}`)
-            .send(updateData);
-        })
-        .then(function(res) {
-          res.should.have.status(204);
+            // make request then inspect it to make sure it reflects
+            // data we sent
+            return chai.request(app)
+              .put(`/tools/${tool.id}`)
+              .send(updateData);
+          })
+          .then(function(res) {
+            res.should.have.status(204);
 
-          return Tool.findById(updateData.id).exec();
-        })
-        .then(function(tool) {
-          for (let i = 0; i < tool.length; i++) {
-            updateData.category[i].should.equal(tool.category[i]);
-          }
-          updateData.rented.should.equal(tool.rented);
-          updateData.disabled.should.equal(tool.disabled);
-          updateData.toolName.should.contain(tool.toolName);
-          updateData.description.should.equal(tool.description);
-          updateData.rate.should.equal(tool.rate);
-          // Date.parse(updateData.datePosted).should.equal(Date.parse(tool.datePosted));
-          for (let i = 0; i < tool.availability.lenth; i++) {
-            Date.parse(updateData.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
-            Date.parse(updateData.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
-          }
-          for (let i = 0; i < tool.images.length; i++) {
-            updateData.images[i].should.equal(tool.images[i]);
-          }
+            return Tool.findById(updateData.id).exec();
+          })
+          .then(function(tool) {
+            for (let i = 0; i < tool.length; i++) {
+              updateData.category[i].should.equal(tool.category[i]);
+            }
+            updateData.rented.should.equal(tool.rented);
+            updateData.disabled.should.equal(tool.disabled);
+            updateData.toolName.should.contain(tool.toolName);
+            updateData.description.should.equal(tool.description);
+            updateData.rate.should.equal(tool.rate);
+            // Date.parse(updateData.datePosted).should.equal(Date.parse(tool.datePosted));
+            for (let i = 0; i < tool.availability.lenth; i++) {
+              Date.parse(updateData.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
+              Date.parse(updateData.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
+            }
+            for (let i = 0; i < tool.images.length; i++) {
+              updateData.images[i].should.equal(tool.images[i]);
+            }
+          });
         });
+    });
+
+    describe('DELETE endpoint', function() {
+      // strategy:
+      //  1. get a tool listening
+      //  2. make a DELETE request for that listing's id
+      //  3. assert that response has right status code
+      //  4. prove that listing with the id doesn't exist in db anymore
+      it('delete a tool listing by id', function() {
+
+        let tool;
+
+        return Tool
+          .findOne()
+          .exec()
+          .then(function(_tool) {
+            tool = _tool;
+            return chai.request(app).delete(`/tools/${tool.id}`);
+          })
+          .then(function(res) {
+            res.should.have.status(204);
+            return Tool.findById(tool.id).exec();
+          })
+          .then(function(_tool) {
+            // when a variable's value is null, chaining `should`
+            // doesn't work. so `_restaurant.should.be.null` would raise
+            // an error. `should.be.null(_restaurant)` is how we can
+            // make assertions about a null value.
+            should.not.exist(_tool);
+          });
       });
-  });
+    });
 });
