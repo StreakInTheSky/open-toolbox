@@ -127,6 +127,12 @@ describe('Open-toolbox API resource', function() {
 	// 			});
 	// 	});
 	// });
+  describe('GET for categories', function() {
+
+    it('should return all categories', function() {
+      return chai.request(categories)
+    })
+  })
 
 	describe('GET endpoint', function() {
 
@@ -156,7 +162,7 @@ describe('Open-toolbox API resource', function() {
     });
 
 
-    it('should return tool listings with right fields', function() {
+    it('should return tool listings with right fields and correct data when requested by id', function() {
       // Strategy: Get back all tools, and ensure they have expected keys
 
       let resTool;
@@ -174,7 +180,13 @@ describe('Open-toolbox API resource', function() {
           });
 
           resTool = res.body[0];
-          return Tool.findById(resTool.id);
+
+          // return tool listing when requested by id;
+          return chai.request(app)
+                 .get(`/tools/${resTool.id}`)
+                 .then(function(res) {
+                   return res.body;
+                 });
         })
         .then(function(tool) {
           resTool.id.should.equal(tool.id);
