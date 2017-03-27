@@ -95,6 +95,8 @@ var MOCK_DATA = {
 
 function getListings(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
+
+	// insert calls to API here
 }
 
 // this function stays the same when we connect
