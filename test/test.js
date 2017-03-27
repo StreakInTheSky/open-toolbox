@@ -78,10 +78,10 @@ function seedToolData(number) {
 }
 
 function seedCatagoryData() {
-  return new Promise((catdog, bacteria) => {
+  return new Promise((success, failure) => {
     categories = [{category: "home tools"}, {category: "power tools"}, {category: "automechanics"}, {category: "gardening"}, {category: "carpentry"}, {category: "metal-working"}, {category: "plumbing"}];
     Category.insertMany(categories).then(() => {
-      catdog()
+      success()
     });
   })
 }
@@ -118,15 +118,8 @@ describe('Open-toolbox API resource', function() {
     return closeServer();
   })
 
-	// describe('GET endpoint', function() {
-	// 	it('should get all tool listings', function() {
-	// 		return chai.request(app)
-	// 			.get('/tools')
-	// 			.then(function(res) {
-	// 				res.should.have.status(200);
-	// 			});
-	// 	});
-	// });
+  // this makes sure that the app can connect to the categories collection
+  // which is needed to evaluate categories that are sent to the app
   describe('GET for categories', function() {
 
     it('should return all categories', function() {
