@@ -1,5 +1,4 @@
-var MOCK_DATA = {
-	listings: [
+var MOCK_DATA = [
 		{
 			id: 'aaaaaaa',
 			userId: 111111,
@@ -90,8 +89,7 @@ var MOCK_DATA = {
 			],
 			images: ['../images/drill1.jpg']
 		}
-	]
-}
+	];
 
 function getListings(callbackFn) {
   setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
@@ -102,15 +100,15 @@ function getListings(callbackFn) {
 // this function stays the same when we connect
 // to real API later
 function displayListings(data) {
-  for (index in data.listings) {
+  for (index in data) {
 		// finds template elements in DOM
 		// and replaces content with content from db
 		var listEl = $('.templates .result-listing').clone();
-		listEl.find('.tool-name').text(data.listings[index].toolName);
-		listEl.find('.rate').text('$' + ((data.listings[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
-		listEl.find('img').attr('src', data.listings[index].images[0]);
-		listEl.find('.description').text(data.listings[index].description);
-		listEl.attr('data-id', data.listings[index].id);
+		listEl.find('.tool-name').text(data[index].toolName);
+		listEl.find('.rate').text('$' + ((data[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
+		listEl.find('img').attr('src', data[index].images[0]);
+		listEl.find('.description').text(data[index].description);
+		listEl.attr('data-id', data[index].id);
      $('ol.results').append(listEl);
   }
 }
@@ -122,7 +120,7 @@ function bindEventHandlers() {
 	$('.results').on('click', '.button-edit', function() {
 		window.location.pathname = '/edit-listing/' + $(this).closest('.result-listing').data('id');
 		// get by id
-		const item = MOCK_DATA.listings[0];
+		const item = MOCK_DATA[0];
 		$('#tool-name').val(item.toolName);
 		console.log(item);
 	})
