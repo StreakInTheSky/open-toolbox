@@ -25,6 +25,46 @@ app.get('/edit-listing/:itemId', (req, res) => {
 // END WEB
 
 // API
+
+function categoryCheckIsValid(req, res, categories) {
+	function lookupCategories(entry) {
+		for(let i=0; i < categories.length; i++) {
+			if (categories[i].category === entry) {
+				return true;
+			}
+		}
+		return false;
+	};
+
+	let checked = req.body.category.map(lookupCategories);
+
+	for(let i = 0; i < checked.length; i++) {
+		if (checked[i] === false) {
+			const message = `\`${req.body.category[i]}\` is not a valid category`
+			console.error(message);
+			res.status(400).send(message);
+			return false;
+		}
+	}
+	return true;
+}
+
+// GET categories to be used for testing
+app.get('/categories', (req, res) => {
+	Category
+	.find()
+	.exec()
+	.then(Categories => res.json(
+		Categories.map(category => category.apiRepr())
+	))
+	.catch(
+		err => {
+			console.error(err);
+			res.status(500).json({message: 'Internal server error'});
+		});
+	})
+
+// // GET all listings with a limit of 10 results
 // app.get('/tools', (req, res) => {
 // 	Tool
 //     .find()
@@ -43,43 +83,7 @@ app.get('/edit-listing/:itemId', (req, res) => {
 //     });
 // })
 
-app.get('/categories', (req, res) => {
-	Category
-    .find()
-    .exec()
-    .then(Categories => res.json(
-        Categories.map(category => category.apiRepr())
-    ))
-    .catch(
-      err => {
-        console.error(err);
-        res.status(500).json({message: 'Internal server error'});
-    });
-})
-
-function categoryCheckIsValid(req, res, categories) {
-	function lookupCategories(entry) {
-		for(let i=0; i < categories.length; i++) {
-			if (categories[i].category === entry) {
-				return true;
-			}
-		}
-		return false;
-	};
-
-	let checked = req.body.category.map(lookupCategories);
-
-	for(let i = 0; i < checked.length; i++) {
-		if (checked[i] === false) {
-			const message = `\`${req.body.category[i]}\` is not a valid category`
-			console.error(message);
-		 	res.status(400).send(message);
-			return false;
-		}
-	}
-	return true;
-}
-
+// GET queryable listings
 app.get('/tools', (req, res) => {
     const filters = {};
     const queryableFields = ['category', 'toolName'];
