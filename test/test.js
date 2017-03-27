@@ -130,7 +130,17 @@ describe('Open-toolbox API resource', function() {
   describe('GET for categories', function() {
 
     it('should return all categories', function() {
-      return chai.request(categories)
+      let res;
+      return chai.request(app)
+        .get('/categories')
+        .then(function(_res) {
+          res = _res;
+          res.should.have.status(200);
+          return Category.count();
+        })
+        .then(function(count) {
+          res.body.should.have.length.of(count);
+        })
     })
   })
 
