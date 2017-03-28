@@ -52,12 +52,12 @@ gulp.task('clean', function() {
 
 // Server
 gulp.task('webserver', function() {
-  // gulp.src('./public/')
-  //   .pipe(server({
-  //     livereload: true,
-  //     directoryListing: false,
-  //     open: true
-  //   }));
+  gulp.src('./public/')
+    .pipe(server({
+      livereload: true,
+      directoryListing: false,
+      open: true
+    }));
 	gulp.run('watch')
 });
 
