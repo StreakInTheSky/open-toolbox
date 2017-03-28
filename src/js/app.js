@@ -1,100 +1,7 @@
-var MOCK_DATA = [
-		{
-			id: 'aaaaaaa',
-			userId: 111111,
-			category: ['home tools'],
-			rented: false,
-			disabled: false,
-			toolName: 'screwdriver',
-			description: 'Brand new.',
-			rate: 100,
-			datePosted: '1486006613722',
-			availability: [
-				{
-					start: '1486006623722',
-					end: '1486006683723'
-				}
-			],
-			images: ['../images/screwdriver1.jpg']
-		},
-		{
-			id: 'bbbbbbb',
-			userId: 111111,
-			category: ['home tools'],
-			rented: true,
-			disabled: false,
-			toolName: 'hammer',
-			description: 'Well worn, but works.',
-			rate: 50,
-			datePosted: '1486006613822',
-			availability: [
-				{
-					start: '1486006623722',
-					end: '1486006683723'
-				}
-			],
-			images: ['../images/hammer1.jpg']
-		},
-		{
-			id: 'ccccccc',
-			userId: 111111,
-			category: ['power tools'],
-			rented: false,
-			disabled: false,
-			toolName: 'drill',
-			description: 'Runs strong.',
-			rate: 25,
-			datePosted: '1486006613922',
-			availability: [
-				{
-					start: '1486006623722',
-					end: '1486006683723'
-				}
-			],
-			images: ['../images/drill1.jpg']
-		},
-		{
-			id: 'ddddddd',
-			userId: 222222,
-			category: ['home tools'],
-			rented: false,
-			disabled: false,
-			toolName: 'hammer',
-			description: 'Well worn, but works.',
-			rate: 50,
-			datePosted: '1486006614722',
-			availability: [
-				{
-					start: '1486006623722',
-					end: '1486006683723'
-				}
-			],
-			images: ['../images/hammer1.jpg']
-		},
-		{
-			id: 'eeeeeee',
-			userId: 222222,
-			category: ['power tools'],
-			rented: false,
-			disabled: false,
-			toolName: 'drill',
-			description: 'Runs strong.',
-			rate: 25,
-			datePosted: '1486006614822',
-			availability: [
-				{
-					start: '1486006623722',
-					end: '1486006683723'
-				}
-			],
-			images: ['../images/drill1.jpg']
-		}
-	];
+const apiBase = 'http://localhost:8080/tools/';
 
 function getListings(callbackFn) {
-  setTimeout(function(){ callbackFn(MOCK_DATA)}, 100);
-
-	// insert calls to API here
+	$.getJSON(apiBase, data => callbackFn(data));
 }
 
 // this function stays the same when we connect
@@ -118,11 +25,13 @@ function bindEventHandlers() {
 		event.preventDefault();
 	})
 	$('.results').on('click', '.button-edit', function() {
-		window.location.pathname = '/edit-listing/' + $(this).closest('.result-listing').data('id');
+		let listingId = $(this).closest('.result-listing').data('id')
+		window.location.pathname = '/edit-listing/' + listingId;
 		// get by id
-		const item = MOCK_DATA[0];
-		$('#tool-name').val(item.toolName);
-		console.log(item);
+		$.getJSON(apiBase + listingId, function(data) {
+			$('#tool-name').val(data.toolName);
+			console.log(data);
+		});
 	})
 }
 
