@@ -62,5 +62,13 @@ main {
 				}
 			}
 		}
+
+		.disabled {
+			background-color: #AAA;
+
+			img {
+				opacity: .5;
+			}
+		}
 	}
 }

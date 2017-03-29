@@ -25,12 +25,38 @@ function bindEventHandlers() {
 		event.preventDefault();
 	})
 	$('.results').on('click', '.button-edit', function() {
-		let listingId = $(this).closest('.result-listing').data('id')
+		let listingId = $(this).closest('.result-listing').data('id');
 		window.location.pathname = '/edit-listing/' + listingId;
 		// get by id
-		$.getJSON(apiBase + listingId, function(data) {
-			$('#tool-name').val(data.toolName);
-			console.log(data);
+
+		$(window).on('load', function(){
+			$.getJSON(apiBase + listingId, function(data) {
+				$('#tool-name').val(data.toolName);
+				console.log(data);
+			});
+		})
+	})
+
+	$('.results').on('click', '.button-disable', function() {
+		let listingId = $(this).closest('.result-listing').data('id');
+
+		$(this).closest('.result-listing').toggleClass('disabled');
+
+		let disabledSettings = {
+			method: 'PUT',
+			data: {
+							disabled: true,
+							id: listingId
+						}
+		};
+
+		let toggleDisabled =
+		$(this).text(function(){
+			if($(this).text() === 'Disable') {
+				return 'Enable';
+			} else {
+				return 'Disable';
+			}
 		});
 	})
 }

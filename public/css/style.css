@@ -183,6 +183,10 @@ main {
           margin: 0 5px;
           box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
           font-size: 0.7em; }
+    main .results .disabled {
+      background-color: #AAA; }
+      main .results .disabled img {
+        opacity: .5; }
 
 footer {
   -ms-flex-item-align: end;
