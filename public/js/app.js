@@ -1,4 +1,4 @@
-const apiBase = 'http://localhost:8080/tools/';
+const apiBase = '/tools';
 
 function getListings(callbackFn) {
 	$.getJSON(apiBase, data => callbackFn(data));
@@ -26,11 +26,11 @@ function bindEventHandlers() {
 	})
 	$('.results').on('click', '.button-edit', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
-		window.location.pathname = '/edit-listing/' + listingId;
+		window.location.pathname = apiBase + '/edit-listing/' + listingId;
 		// get by id
 
 		$(window).on('load', function(){
-			$.getJSON(apiBase + listingId, function(data) {
+			$.getJSON(apiBase + '/' + listingId, function(data) {
 				$('#tool-name').val(data.toolName);
 				console.log(data);
 			});
