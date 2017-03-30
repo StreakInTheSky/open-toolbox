@@ -27,7 +27,6 @@ function bindEventHandlers() {
 	$('.results').on('click', '.button-edit', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
 		window.location.pathname = '/edit-listing/' + listingId;
-		// get by id
 
 		$(window).on('load', function(){
 			$.getJSON(apiBase + '/' + listingId, function(data) {
