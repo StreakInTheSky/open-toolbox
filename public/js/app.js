@@ -16,7 +16,14 @@ function displayListings(data) {
 		listEl.find('img').attr('src', data[index].images[0]);
 		listEl.find('.description').text(data[index].description);
 		listEl.attr('data-id', data[index].id);
-     $('ol.results').append(listEl);
+
+		if (data[index].disabled === true) {
+			listEl.addClass('disabled');
+			listEl.find('.button-disable').addClass('hidden');
+			listEl.find('.button-enable').removeClass('hidden');
+		}
+
+    $('ol.results').append(listEl);
   }
 }
 
@@ -31,32 +38,55 @@ function bindEventHandlers() {
 		$(window).on('load', function(){
 			$.getJSON(apiBase + '/' + listingId, function(data) {
 				$('#tool-name').val(data.toolName);
-				console.log(data);
+				console.log(res);
 			});
 		})
 	})
 
+	//disables listing
 	$('.results').on('click', '.button-disable', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
 
 		$(this).closest('.result-listing').toggleClass('disabled');
+		$(this).addClass('hidden');
+		$(this).siblings('.button-enable').removeClass('hidden');
 
 		let disabledSettings = {
 			method: 'PUT',
-			data: {
-							disabled: true,
-							id: listingId
-						}
+			data: JSON.stringify({
+				id: listingId,
+				disabled: true
+			}),
+			dataType: 'json',
+			contentType: 'application/json; charset=utf-8'
 		};
 
-		let toggleDisabled =
-		$(this).text(function(){
-			if($(this).text() === 'Disable') {
-				return 'Enable';
-			} else {
-				return 'Disable';
-			}
-		});
+		$.ajax(apiBase + '/' + listingId, disabledSettings).done(function(res) {
+			console.log(res)
+		})
+	})
+
+	//enables listing
+	$('.results').on('click', '.button-enable', function() {
+		let listingId = $(this).closest('.result-listing').data('id');
+
+		$(this).closest('.result-listing').toggleClass('disabled');
+		$(this).addClass('hidden');
+		$(this).siblings('.button-disable').removeClass('hidden');
+
+		let disabledSettings = {
+			method: 'PUT',
+			data: JSON.stringify({
+				id: listingId,
+				disabled: false
+			}),
+			dataType: 'json',
+			contentType: 'application/json; charset=utf-8'
+		};
+
+		$.ajax(apiBase + '/' + listingId, disabledSettings).done(function(res) {
+			console.log(res)
+		})
 	})
 }
 

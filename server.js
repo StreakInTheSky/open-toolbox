@@ -183,7 +183,7 @@ app.put('/tools/:id', (req, res) => {
 	    }
 	  });
 
-		if (req.body.category && categoryCheckIsValid(req, res, categories)){
+		if (!(req.body.category) || (req.body.category && categoryCheckIsValid(req, res, categories))){
 			return executePut(req, res);
 		}
 
@@ -196,7 +196,9 @@ app.put('/tools/:id', (req, res) => {
 	  Tool
 	    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
 	    .exec()
-	    .then(tool => res.status(204).end())
+	    .then(tool => {
+							res.status(204).json(tool.apiRepr())
+						})
 	    .catch(err => res.status(500).json({message: 'Internal server error'}));
 	}
 });
