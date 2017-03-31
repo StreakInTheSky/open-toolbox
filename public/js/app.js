@@ -28,23 +28,24 @@ function displayListings(data) {
 }
 
 function bindEventHandlers() {
+	// Edit-button handler
 	$('.edit-form').on('submit', function(event) {
 		event.preventDefault();
 	})
 	$('.results').on('click', '.button-edit', function() {
-		let listingId = $(this).closest('.result-listing').data('id');
+		var listingId = $(this).closest('.result-listing').data('id');
 		window.location.pathname = '/edit-listing/' + listingId;
 	})
 
 	// Disables listing
 	$('.results').on('click', '.button-disable', function() {
-		let listingId = $(this).closest('.result-listing').data('id');
+		var listingId = $(this).closest('.result-listing').data('id');
 
 		$(this).closest('.result-listing').toggleClass('disabled');
 		$(this).addClass('hidden');
 		$(this).siblings('.button-enable').removeClass('hidden');
 
-		let disabledSettings = {
+		var disabledSettings = {
 			method: 'PUT',
 			data: JSON.stringify({
 				id: listingId,
@@ -59,13 +60,13 @@ function bindEventHandlers() {
 
 	// Enables listing
 	$('.results').on('click', '.button-enable', function() {
-		let listingId = $(this).closest('.result-listing').data('id');
+		var listingId = $(this).closest('.result-listing').data('id');
 
 		$(this).closest('.result-listing').toggleClass('disabled');
 		$(this).addClass('hidden');
 		$(this).siblings('.button-disable').removeClass('hidden');
 
-		let disabledSettings = {
+		var disabledSettings = {
 			method: 'PUT',
 			data: JSON.stringify({
 				id: listingId,
@@ -77,6 +78,16 @@ function bindEventHandlers() {
 
 		$.ajax(apiBase + '/' + listingId, disabledSettings)
 	})
+
+	//Filtering by category
+	$('ul.filters li').on('click', function() {
+		if($(this).attr('id') === 'show-all') {
+			$('ol.results').empty();
+			getAndDisplayListings();
+		} else {
+			filterListings([$(this).attr('id').replace(/\-/, ' ')]);
+		}
+	})
 }
 
 function getListingItem() {
@@ -87,18 +98,17 @@ function getListingItem() {
 	})
 }
 
-function filterListings(filterArr) {
-	var settings = {
-		method: 'POST',
-		data: JSON.stringify({
-			category: { $in: filterArr }
-		}),
-		dataType: 'json',
-		contentType: 'application/json; charset=utf-8'
+function filterListings(filter) {
+	$('ol.results').empty();
+
+	switch(window.location.pathname.split('/')[1]) {
+		case '':
+			getListings(displayListings, '?disabled=false&category=' + encodeURI(filter));
+			return
+		case 'my-listings':
+			getListings(displayListings, '?category=' + encodeURI(filter));
+			return
 	}
-	$.ajax(apiBase + "/f", settings).data(function(data){
-		console.log(data);
-	})
 }
 
 // this function can stay the same even when we
