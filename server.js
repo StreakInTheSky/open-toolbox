@@ -162,13 +162,6 @@ app.post('/tools', (req, res) => {
 	}
 });
 
-app.post('/tools/filter', (req, res) => {
-	console.log(req.body);
-	Tool.find(req.body).exec().then(categories => {
-		res.json(categories)
-	})
-})
-
 app.put('/tools/:id', (req, res) => {
 	Category.find().exec().then(categories => { putInfo(categories); })
 
