@@ -86,7 +86,6 @@ app.get('/categories', (req, res) => {
 // GET queryable listings
 app.get('/tools', (req, res) => {
     const filters = req.query;
-		console.log(filters)
     const queryableFields = ['category', 'toolName'];
     queryableFields.forEach(field => {
         if (req.query[field]) {
