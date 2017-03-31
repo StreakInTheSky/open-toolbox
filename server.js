@@ -85,7 +85,8 @@ app.get('/categories', (req, res) => {
 
 // GET queryable listings
 app.get('/tools', (req, res) => {
-    const filters = {};
+    const filters = req.query;
+		console.log(filters)
     const queryableFields = ['category', 'toolName'];
     queryableFields.forEach(field => {
         if (req.query[field]) {
@@ -160,6 +161,13 @@ app.post('/tools', (req, res) => {
 			});
 	}
 });
+
+app.post('/tools/filter', (req, res) => {
+	console.log(req.body);
+	Tool.find(req.body).exec().then(categories => {
+		res.json(categories)
+	})
+})
 
 app.put('/tools/:id', (req, res) => {
 	Category.find().exec().then(categories => { putInfo(categories); })
