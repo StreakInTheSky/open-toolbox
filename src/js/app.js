@@ -1,7 +1,7 @@
 const apiBase = '/tools';
 
-function getListings(callbackFn) {
-	$.getJSON(apiBase, data => callbackFn(data));
+function getListings(callbackFn, query = '') {
+	$.getJSON(apiBase + query, data => callbackFn(data)); // {disabled: 'false'}
 }
 
 // this function stays the same when we connect
@@ -34,16 +34,9 @@ function bindEventHandlers() {
 	$('.results').on('click', '.button-edit', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
 		window.location.pathname = '/edit-listing/' + listingId;
-
-		$(window).on('load', function(){
-			$.getJSON(apiBase + '/' + listingId, function(data) {
-				$('#tool-name').val(data.toolName);
-				console.log(res);
-			});
-		})
 	})
 
-	//disables listing
+	// Disables listing
 	$('.results').on('click', '.button-disable', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
 
@@ -61,12 +54,10 @@ function bindEventHandlers() {
 			contentType: 'application/json; charset=utf-8'
 		};
 
-		$.ajax(apiBase + '/' + listingId, disabledSettings).done(function(res) {
-			console.log(res)
-		})
+		$.ajax(apiBase + '/' + listingId, disabledSettings)
 	})
 
-	//enables listing
+	// Enables listing
 	$('.results').on('click', '.button-enable', function() {
 		let listingId = $(this).closest('.result-listing').data('id');
 
@@ -84,19 +75,50 @@ function bindEventHandlers() {
 			contentType: 'application/json; charset=utf-8'
 		};
 
-		$.ajax(apiBase + '/' + listingId, disabledSettings).done(function(res) {
-			console.log(res)
-		})
+		$.ajax(apiBase + '/' + listingId, disabledSettings)
+	})
+}
+
+function getListingItem() {
+	$(window).on('load', function(){
+		$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
+			console.log(data)
+		});
+	})
+}
+
+function filterListings(filterArr) {
+	var settings = {
+		method: 'POST',
+		data: JSON.stringify({
+			category: { $in: filterArr }
+		}),
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8'
+	}
+	$.ajax(apiBase + "/f", settings).data(function(data){
+		console.log(data);
 	})
 }
 
 // this function can stay the same even when we
 // are connecting to real API
 function getAndDisplayListings() {
-	getListings(displayListings);
-	bindEventHandlers();
+	switch(window.location.pathname.split('/')[1]) {
+		case '':
+			getListings(displayListings, '?disabled=false');
+			return
+		case 'my-listings':
+			getListings(displayListings);
+			return
+		case 'edit-listing':
+			getListingItem()
+			return
+	}
 }
+
 
 $(function() {
   getAndDisplayListings();
+	bindEventHandlers();
 })
