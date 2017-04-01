@@ -191,6 +191,10 @@ main {
       background-color: #AAA; }
       main .results .disabled img {
         opacity: .5; }
+  main .edit-form .current-image {
+    width: 100px; }
+    main .edit-form .current-image img {
+      width: 100%; }
 
 footer {
   -ms-flex-item-align: end;

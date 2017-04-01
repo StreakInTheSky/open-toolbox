@@ -90,10 +90,26 @@ function bindEventHandlers() {
 	})
 }
 
+function populateEdit(data) {
+	console.log(data);
+	$('#tool-name').val(data.toolName);
+	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
+	$('#description').val(data.description);
+	$('#availability-start').val(moment(data.availability[0].start).format("YYYY-MM-DD"));
+	$('#availability-end').val(moment(data.availability[data.availability.length - 1].end).format("YYYY-MM-DD"));
+	$('.current-image img').attr('src', data.images[0]);
+	data.category.forEach(function(item) {
+		console.log(item);
+		$('.edit-form input[name="' + item + '"]').attr("checked", true);
+	})
+
+
+}
+
 function getListingItem() {
 	$(window).on('load', function(){
 		$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
-			console.log(data)
+			populateEdit(data);
 		});
 	})
 }

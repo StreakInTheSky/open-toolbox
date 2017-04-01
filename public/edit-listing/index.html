@@ -18,16 +18,16 @@
 					<label for="tool-name">Tool Name</label>
 					<input type="text" name="tool-name" id="tool-name">
 					<label for="rate">Rate: $</label>
-					<input type="text" name="rate" id="rate">
+					<input type="text" name="rate" id="rate">/day
 				</p>
 				<p>
 					<label for="description">description</label>
-					<textarea name="description" rows="8" cols="80"></textarea>
+					<textarea name="description" rows="8" cols="80" id="description"></textarea>
 				</p>
 				<p>
 					<label for="categories">Categories (check all that apply)</label>
 
-					<label><input type="checkbox" name="house tools" value="house tools">house tools</label>
+					<label><input type="checkbox" name="home tools" value="home tools">home tools</label>
 					<label><input type="checkbox" name="power tools" value="power tools">power tools</label>
 					<label><input type="checkbox" name="gardening" value="gardening">gardening</label>
 					<label><input type="checkbox" name="automechanics" value="automechanics">automechanics</label>
@@ -42,6 +42,7 @@
 					<input type="date" name="availability-end" id="availability-end">
 				</p>
 				<p>
+					<div class="current-image"><h6>current image:</h6><img src="" alt="default"></div>
 					<label for="image">Image</label>
 					<input type="file" name="image" id="image">
 				</p>
@@ -59,6 +60,7 @@
 	src="https://code.jquery.com/jquery-3.1.1.min.js"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="../js/app.js"></script>
 </body>
 </html>
