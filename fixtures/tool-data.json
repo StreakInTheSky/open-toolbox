@@ -6,12 +6,11 @@
 	"description": "Brand new.",
 	"rate": 100,
 	"datePosted": "1486006613722",
-	"availability": [
-		{
-			"start": "1486006623722",
-			"end": "1486006683723"
-		}
-	],
+	"availability": {
+		"start": "1486006623722",
+		"end": "1486006683723"
+	},
+	"rentedDates": [],
 	"images": ["../images/screwdriver1.jpg"]
 }
 {
@@ -22,12 +21,11 @@
 	"description": "Well worn, but works.",
 	"rate": 50,
 	"datePosted": "1486006613822",
-	"availability": [
-		{
-			"start": "1486006623722",
-			"end": "1486006683723"
-		}
-	],
+	"availability": {
+		"start": "1486006623722",
+		"end": "1486006683723"
+	},
+	"rentedDates": [],
 	"images": ["../images/hammer1.jpg"]
 }
 {
@@ -38,12 +36,11 @@
 	"description": "Runs strong.",
 	"rate": 25,
 	"datePosted": "1486006613922",
-	"availability": [
-		{
-			"start": "1486006623722",
-			"end": "1486006683723"
-		}
-	],
+	"availability": {
+		"start": "1486006623722",
+		"end": "1486006683723"
+	},
+	"rentedDates": [],
 	"images": ["../images/drill1.jpg"]
 }
 {
@@ -54,12 +51,11 @@
 	"description": "Well worn, but works.",
 	"rate": 50,
 	"datePosted": "1486006614722",
-	"availability": [
-		{
-			"start": "1486006623722",
-			"end": "1486006683723"
-		}
-	],
+	"availability": {
+		"start": "1486006623722",
+		"end": "1486006683723"
+	},
+	"rentedDates": [],
 	"images": ["../images/hammer1.jpg"]
 }
 {
@@ -70,11 +66,10 @@
 	"description": "Runs strong.",
 	"rate": 25,
 	"datePosted": "1486006614822",
-	"availability": [
-		{
-			"start": "1486006623722",
-			"end": "1486006683723"
-		}
-	],
+	"availability": {
+		"start": "1486006623722",
+		"end": "1486006683723"
+	},
+	"rentedDates": [],
 	"images": ["../images/drill1.jpg"]
 }

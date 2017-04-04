@@ -180,6 +180,8 @@ app.put('/tools/:id', (req, res) => {
 	    }
 	  });
 
+		console.log(toUpdate);
+
 		if (!(req.body.category) || (req.body.category && categoryCheckIsValid(req, res, categories))){
 			return executePut(req, res);
 		}
@@ -194,6 +196,7 @@ app.put('/tools/:id', (req, res) => {
 	    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
 	    .exec()
 	    .then(tool => {
+							console.log(req.body)
 							res.status(204).json(tool.apiRepr())
 						})
 	    .catch(err => res.status(500).json({message: 'Internal server error'}));

@@ -120,6 +120,26 @@ function submitData(method, data) {
 		data.rate = data.rate * 100;
 	}
 
+	if(data['availability-start']) {
+		var availabilityStart = {
+			start: Date.parse(data['availability-start'])
+		}
+
+		data['availability'] = availabilityStart;
+
+		delete data['availability-start'];
+	}
+
+	if(data['availability-end']) {
+		var availabilityEnd = {
+			end: Date.parse(data['availability-end'])
+		}
+
+		data['availability'] = availabilityEnd;
+
+		delete data['availability-end'];
+	}
+
 	var submitSettings = {
 			url: url,
 			method: method,
@@ -137,8 +157,8 @@ function populateEdit(data) {
 	$('#tool-name').val(data.toolName);
 	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
 	$('#description').val(data.description);
-	$('#availability-start').val(moment(data.availability[0].start).format("YYYY-MM-DD"));
-	$('#availability-end').val(moment(data.availability[data.availability.length - 1].end).format("YYYY-MM-DD"));
+	$('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
+	$('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
 	$('.current-image img').attr('src', data.images[0]);
 	data.category.forEach(function(item) {
 		$('.edit-form input[value="' + item + '"]').attr("checked", true);
