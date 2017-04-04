@@ -147,7 +147,12 @@ function populateEdit(data) {
 
 function detectFieldChange() {
 	$(".edit-form :input").change(function(){
-		 state[$(this).attr('name')] = $(this).val();
+		var input = $(this).attr('name');
+
+		if (input === 'category') {
+			return state[input] = $("input[name='category']:checked").map(function(){return $(this).val()}).get()
+		}
+		 state[input] = $(this).val();
 	})
 }
 
