@@ -1,4 +1,5 @@
 const apiBase = '/tools';
+let state = {};
 
 function getListings(callbackFn, query = '') {
 	$.getJSON(apiBase + query, data => callbackFn(data)); // {disabled: 'false'}
@@ -54,7 +55,7 @@ function bindEventHandlers() {
 			dataType: 'json',
 			contentType: 'application/json; charset=utf-8'
 		};
-
+		console.log(disabledSettings);
 		$.ajax(apiBase + '/' + listingId, disabledSettings)
 	})
 
@@ -88,10 +89,51 @@ function bindEventHandlers() {
 			filterListings([$(this).attr('id').replace(/\-/, ' ')]);
 		}
 	})
+
+	$('#button-submit').click(function(){
+		var method;
+		switch(window.location.pathname.split('/')[1]) {
+			case 'edit-listing':
+				method = "PUT"
+				submitData(method, state);
+				return
+			case 'add-listing':
+				method = "POST"
+				submitData(method, state);
+				return
+		}
+	})
+}
+
+function submitData(method, data) {
+	var url;
+
+	// change url depending on page
+	if (method === "PUT") {
+		url = apiBase + '/' + data.id;
+	} else {
+		url = apiBase;
+	}
+
+	//converts rate to cents
+	if(data.rate) {
+		data.rate = data.rate * 100;
+	}
+
+	var submitSettings = {
+			url: url,
+			method: method,
+			data: JSON.stringify(data),
+			dataType: 'json',
+			contentType: 'application/json; charset=utf-8'
+	};
+
+	$.ajax(submitSettings);
+	location.reload();
 }
 
 function populateEdit(data) {
-	console.log(data);
+	state.id = data.id;
 	$('#tool-name').val(data.toolName);
 	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
 	$('#description').val(data.description);
@@ -99,11 +141,14 @@ function populateEdit(data) {
 	$('#availability-end').val(moment(data.availability[data.availability.length - 1].end).format("YYYY-MM-DD"));
 	$('.current-image img').attr('src', data.images[0]);
 	data.category.forEach(function(item) {
-		console.log(item);
-		$('.edit-form input[name="' + item + '"]').attr("checked", true);
+		$('.edit-form input[value="' + item + '"]').attr("checked", true);
 	})
+}
 
-
+function detectFieldChange() {
+	$(".edit-form :input").change(function(){
+		 state[$(this).attr('name')] = $(this).val();
+	})
 }
 
 function getListingItem() {
@@ -147,4 +192,5 @@ function getAndDisplayListings() {
 $(function() {
   getAndDisplayListings();
 	bindEventHandlers();
+	detectFieldChange();
 })

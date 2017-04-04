@@ -14,9 +14,6 @@ const {PORT, DATABASE_URL} = require('./config');
 const {Tool, Category} = require('./model');
 
 // WEB
-app.get('/', (req, res) => {
-	res.json({test: true});
-})
 
 app.get('/edit-listing/:itemId', (req, res) => {
 	res.cookie('item-id', req.params.itemId);

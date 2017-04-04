@@ -16,7 +16,7 @@
 			<form class="edit-form">
 				<p>
 					<label for="tool-name">Tool Name</label>
-					<input type="text" name="tool-name" id="tool-name">
+					<input type="text" name="toolName" id="tool-name">
 					<label for="rate">Rate: $</label>
 					<input type="text" name="rate" id="rate">/day
 				</p>
@@ -27,13 +27,13 @@
 				<p>
 					<label for="categories">Categories (check all that apply)</label>
 
-					<label><input type="checkbox" name="home tools" value="home tools">home tools</label>
-					<label><input type="checkbox" name="power tools" value="power tools">power tools</label>
-					<label><input type="checkbox" name="gardening" value="gardening">gardening</label>
-					<label><input type="checkbox" name="automechanics" value="automechanics">automechanics</label>
-					<label><input type="checkbox" name="carpentry" value="carpentry">carpentry</label>
-					<label><input type="checkbox" name="plumbing" value="plumbing">plumbing</label>
-					<label><input type="checkbox" name="metal-working" value="metal-working">metal-working</label>
+					<label><input type="checkbox" name="category" value="home tools">home tools</label>
+					<label><input type="checkbox" name="category" value="power tools">power tools</label>
+					<label><input type="checkbox" name="category" value="gardening">gardening</label>
+					<label><input type="checkbox" name="category" value="automechanics">automechanics</label>
+					<label><input type="checkbox" name="category" value="carpentry">carpentry</label>
+					<label><input type="checkbox" name="category" value="plumbing">plumbing</label>
+					<label><input type="checkbox" name="category" value="metal-working">metal-working</label>
 				</p>
 				<p>
 					<label for="availability-start">Start</label>
@@ -47,8 +47,8 @@
 					<input type="file" name="image" id="image">
 				</p>
 				<p>
-					<input type="submit">
-					<button class="button-delete">Delete</button>
+					<input type="submit" id="button-submit">
+					<button id="button-delete">Delete</button>
 				</p>
 			</form>
 		</main>
