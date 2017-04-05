@@ -29,6 +29,12 @@ function displayListings(data) {
 }
 
 function bindEventHandlers() {
+	// Add new listing
+	$('#add-new').click(function(event){
+		event.preventDefault();
+		window.location.pathname = '/add-listing/';
+	})
+
 	// Edit-button handler
 	$('.edit-form').on('submit', function(event) {
 		event.preventDefault();
@@ -78,6 +84,19 @@ function bindEventHandlers() {
 		};
 
 		$.ajax(apiBase + '/' + listingId, disabledSettings)
+	})
+
+	// Delete listing
+	$('#button-delete').click(function() {
+		var listingId = window.location.pathname.split('/')[2];
+
+		$.ajax({
+			url: apiBase + '/' + listingId,
+			method: 'DELETE'
+		})
+
+		alert('Deleted the listing');
+		window.location.pathname = '/my-listings'
 	})
 
 	//Filtering by category

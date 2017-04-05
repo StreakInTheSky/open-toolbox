@@ -15,6 +15,11 @@ header {
 	h1 {
 		flex: 1;
 		color: gray;
+
+		a {
+			color: gray;
+			text-decoration: none;
+		}
 	}
 
 	form {

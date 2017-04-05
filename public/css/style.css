@@ -101,6 +101,9 @@ header {
     -ms-flex: 1;
         flex: 1;
     color: gray; }
+    header h1 a {
+      color: gray;
+      text-decoration: none; }
   header form {
     -ms-flex: auto;
         flex: auto;
@@ -133,7 +136,8 @@ aside {
     aside li:hover {
       background-color: lightgray;
       color: green;
-      transition: all 0.3s ease-in-out; }
+      transition: all 0.3s ease-in-out;
+      cursor: pointer; }
   aside .my-listings-buttons {
     margin-bottom: 20px; }
     aside .my-listings-buttons li {
