@@ -9,7 +9,7 @@ const toolSchema = mongoose.Schema({
 	description: {type: String, required: true},
 	rate: {type: Number, required: true},
 	datePosted: {type: Date},
-	availability: {start: Date, end: Date},
+	availability: dateRangeSchema,
 	rentedDates: [dateRangeSchema],
 	images: [String]
 })
