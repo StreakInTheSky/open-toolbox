@@ -118,8 +118,10 @@ function bindEventHandlers() {
 		if($(this).attr('id') === 'show-all') {
 			$('ol.results').empty();
 			getAndDisplayListings();
+			$('main h2').text("all listings");
 		} else {
 			filterListings([$(this).attr('id').replace(/\-/, ' ')]);
+
 		}
 	})
 
@@ -211,6 +213,7 @@ function filterListings(filter) {
 	switch(window.location.pathname.split('/')[1]) {
 		case '':
 			getListings(displayListings, '?disabled=false&category=' + encodeURI(filter));
+			$('main h2').text(filter);
 			return
 		case 'my-listings':
 			getListings(displayListings, '?category=' + encodeURI(filter));
