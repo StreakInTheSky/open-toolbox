@@ -90,13 +90,15 @@ function bindEventHandlers() {
 	$('#button-delete').click(function() {
 		var listingId = window.location.pathname.split('/')[2];
 
-		$.ajax({
-			url: apiBase + '/' + listingId,
-			method: 'DELETE'
-		})
+		var confirmDelete = confirm('Delete the listing?');
 
-		alert('Deleted the listing');
-		window.location.pathname = '/my-listings'
+		if (confirmDelete === true) {
+			$.ajax({
+				url: apiBase + '/' + listingId,
+				method: 'DELETE'
+			})
+			window.location.pathname = '/my-listings'
+		}
 	})
 
 	//Filtering by category
@@ -115,11 +117,11 @@ function bindEventHandlers() {
 			case 'edit-listing':
 				method = "PUT"
 				submitData(method, state);
-				return
+				return;
 			case 'add-listing':
 				method = "POST"
 				submitData(method, state);
-				return
+				window.location.pathname = 'my-listings';
 		}
 	})
 }
