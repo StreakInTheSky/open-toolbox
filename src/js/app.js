@@ -14,7 +14,7 @@ function displayListings(data) {
 		var listEl = $('.templates .result-listing').clone();
 		listEl.find('.tool-name').text(data[index].toolName);
 		listEl.find('.rate').text('$' + ((data[index].rate)/Math.pow(10, 2)).toFixed(2) + '/day');
-		listEl.find('img').attr('src', data[index].images[0]);
+		listEl.find('img').attr('src', data[index].image);
 		listEl.find('.description').text(data[index].description);
 		listEl.attr('data-id', data[index].id);
 
@@ -29,6 +29,18 @@ function displayListings(data) {
 }
 
 function bindEventHandlers() {
+	$('#image').on('change', function() {
+		if (this.files && this.files[0]) {
+			var reader = new FileReader()
+			reader.addEventListener('load', function(event) {
+				console.log(event.target.result);
+				$('.current-image img').attr('src', event.target.result)
+				state.image = event.target.result;
+			})
+		}
+		reader.readAsDataURL(this.files[0])
+	})
+
 	// Add new listing
 	$('#add-new').click(function(event){
 		event.preventDefault();
@@ -136,30 +148,16 @@ function submitData(method, data) {
 		url = apiBase;
 	}
 
-	//converts rate to cents
-	if(data.rate) {
-		data.rate = data.rate * 100;
-	}
+	Object.assign(data, {
+		availability: {
+			start: data['availability-start'] ? data['availability-start'] : moment().format("YYYY-MM-DD"),
+			end: data['availability-end'] ? data['availability-end'] : moment().add(1, 'days').format("YYYY-MM-DD")
+		},
+		rate: data.rate * 100
+	})
 
-	if(data['availability-start']) {
-		var availabilityStart = {
-			start: Date.parse(data['availability-start'])
-		}
-
-		data['availability'] = availabilityStart;
-
-		delete data['availability-start'];
-	}
-
-	if(data['availability-end']) {
-		var availabilityEnd = {
-			end: Date.parse(data['availability-end'])
-		}
-
-		data['availability'] = availabilityEnd;
-
-		delete data['availability-end'];
-	}
+	delete data['availability-start'];
+	delete data['availability-end'];
 
 	var submitSettings = {
 			url: url,
@@ -175,12 +173,14 @@ function submitData(method, data) {
 
 function populateEdit(data) {
 	state.id = data.id;
+	state['availability-start'] = moment(data.availability.start).format("YYYY-MM-DD")
+	state['availability-end'] = moment(data.availability.end).format("YYYY-MM-DD")
 	$('#tool-name').val(data.toolName);
 	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
 	$('#description').val(data.description);
 	$('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
 	$('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
-	$('.current-image img').attr('src', data.images[0]);
+	$('.current-image img').attr('src', data.image);
 	data.category.forEach(function(item) {
 		$('.edit-form input[value="' + item + '"]').attr("checked", true);
 	})

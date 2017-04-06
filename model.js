@@ -11,7 +11,7 @@ const toolSchema = mongoose.Schema({
 	datePosted: {type: Date},
 	availability: dateRangeSchema,
 	rentedDates: [dateRangeSchema],
-	images: [String]
+	image: String
 })
 
 // *virtuals* (http://mongoosejs.com/docs/guide.html#virtuals)
@@ -40,7 +40,7 @@ toolSchema.methods.apiRepr = function() {
   	datePosted: this.datePosted,
   	availability: this.availability,
 		rentedDates: this.rentedDates,
-  	images: this.images
+  	image: this.image
   }
 }
 

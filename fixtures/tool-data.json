@@ -5,13 +5,13 @@
 	"toolName": "screwdriver",
 	"description": "Brand new.",
 	"rate": 100,
-	"datePosted": "1486006613722",
+	"datePosted": 1486006613722,
 	"availability": {
-		"start": "1486006623722",
-		"end": "1486006683723"
+		"start": "2017-04-05",
+		"end": "2017-04-22"
 	},
 	"rentedDates": [],
-	"images": ["../images/screwdriver1.jpg"]
+	"image": "../images/screwdriver1.jpg"
 }
 {
 	"category": ["home tools"],
@@ -20,13 +20,13 @@
 	"toolName": "hammer",
 	"description": "Well worn, but works.",
 	"rate": 50,
-	"datePosted": "1486006613822",
+	"datePosted": 1486006613822,
 	"availability": {
-		"start": "1486006623722",
-		"end": "1486006683723"
+		"start": "2017-04-05",
+		"end": "2017-04-22"
 	},
 	"rentedDates": [],
-	"images": ["../images/hammer1.jpg"]
+	"image": "../images/hammer1.jpg"
 }
 {
 	"category": ["power tools"],
@@ -35,13 +35,13 @@
 	"toolName": "drill",
 	"description": "Runs strong.",
 	"rate": 25,
-	"datePosted": "1486006613922",
+	"datePosted": 1486006613922,
 	"availability": {
-		"start": "1486006623722",
-		"end": "1486006683723"
+		"start": "2017-04-05",
+		"end": "2017-04-22"
 	},
 	"rentedDates": [],
-	"images": ["../images/drill1.jpg"]
+	"image": "../images/drill1.jpg"
 }
 {
 	"category": ["home tools"],
@@ -50,13 +50,13 @@
 	"toolName": "hammer",
 	"description": "Well worn, but works.",
 	"rate": 50,
-	"datePosted": "1486006614722",
+	"datePosted": 1486006614722,
 	"availability": {
-		"start": "1486006623722",
-		"end": "1486006683723"
+		"start": "2017-04-05",
+		"end": "2017-04-22"
 	},
 	"rentedDates": [],
-	"images": ["../images/hammer1.jpg"]
+	"image": "../images/hammer1.jpg"
 }
 {
 	"category": ["power tools"],
@@ -65,11 +65,11 @@
 	"toolName": "drill",
 	"description": "Runs strong.",
 	"rate": 25,
-	"datePosted": "1486006614822",
+	"datePosted": 1486006614822,
 	"availability": {
-		"start": "1486006623722",
-		"end": "1486006683723"
+		"start": "2017-04-05",
+		"end": "2017-04-22"
 	},
 	"rentedDates": [],
-	"images": ["../images/drill1.jpg"]
+	"image": "../images/drill1.jpg"
 }

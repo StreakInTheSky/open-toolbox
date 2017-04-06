@@ -172,7 +172,7 @@ app.put('/tools/:id', (req, res) => {
 	    res.status(400).json({message: message});
 	  }
 
-	  const updateableFields = ['toolName', 'category', 'description', 'rate', 'images', 'disabled', 'rented', 'availability'];
+	  const updateableFields = ['toolName', 'category', 'description', 'rate', 'image', 'disabled', 'rented', 'availability'];
 
 	  updateableFields.forEach(field => {
 	    if (field in req.body) {
