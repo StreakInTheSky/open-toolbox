@@ -146,7 +146,7 @@ app.post('/tools', (req, res) => {
 				rate: req.body.rate,
 				datePosted: Date(),
 				availability: req.body.availability,
-				images: req.body.images})
+				image: req.body.image})
 			.then( tool => {
 						console.log("Success!")
 						res.status(201).json(tool.apiRepr())

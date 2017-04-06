@@ -39,7 +39,7 @@ function generateRate() {
 }
 
 function generateAvailability() {
-	return [{start: Date.parse('Mar 1, 2017'), end: Date.parse('Apr 1, 2017')}];
+	return {start: Date.parse('Mar 1, 2017'), end: Date.parse('Apr 1, 2017')};
 }
 
 function generateBoolean() {
@@ -58,7 +58,7 @@ function generateTool() {
 		rate: generateRate(),
 		datePosted: Date.parse('Feb 15, 2017'),
 		availability: generateAvailability(),
-		images: [toolName + '1.jpg']
+		image: toolName + '1.jpg'
 	}
 }
 
@@ -179,7 +179,7 @@ describe('Open-toolbox API resource', function() {
 
           res.body.forEach(function(tool) {
             tool.should.be.a('object');
-            tool.should.include.keys("id", "category", "rented", "disabled", "toolName", "description", "rate", "datePosted", "availability", "images")
+            tool.should.include.keys("id", "category", "rented", "disabled", "toolName", "description", "rate", "datePosted", "availability", "rentedDates", "image")
           });
 
           resTool = res.body[0];
@@ -206,9 +206,7 @@ describe('Open-toolbox API resource', function() {
 						Date.parse(resTool.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
 						Date.parse(resTool.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
 					}
-					for (let i = 0; i < tool.images.length; i++) {
-						resTool.images[i].should.equal(tool.images[i]);
-					}
+					resTool.image.should.equal(tool.image);
         });
     });
   });
@@ -258,9 +256,7 @@ describe('Open-toolbox API resource', function() {
 							Date.parse(tool.availability[i].start).should.equal(Date.parse(newTool.availability[i].start));
 							Date.parse(tool.availability[i].end).should.equal(Date.parse(newTool.availability[i].end));
 						}
-						for (let i = 0; i < tool.images.length; i++) {
-							tool.images[i].should.equal(newTool.images[i]);
-						}
+						tool.image.should.equal(newTool.image);
 	        });
 	    });
 	  });
@@ -306,9 +302,7 @@ describe('Open-toolbox API resource', function() {
               Date.parse(updateData.availability[i].start).should.equal(Date.parse(tool.availability[i].start));
               Date.parse(updateData.availability[i].end).should.equal(Date.parse(tool.availability[i].end));
             }
-            for (let i = 0; i < tool.images.length; i++) {
-              updateData.images[i].should.equal(tool.images[i]);
-            }
+            updateData.image.should.equal(tool.image);
           });
         });
     });
