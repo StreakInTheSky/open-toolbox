@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/style.css">
 		<meta charset="UTF-8">
 		<title>Open Toolbox</title>
@@ -8,54 +9,104 @@
 	<body>
 	<header>
 		<h1><a href="/">Open Toolbox</a></h1>
-		<form action=""><input type="text"><button type="submit">Search</button></form>
 		<a href="/my-listings">My Listings</a>
 	</header>
 	<div class="content">
 		<main>
-			<form class="edit-form">
-				<p>
-					<label for="tool-name">Tool Name</label>
-					<input type="text" name="toolName" id="tool-name">
-					<label for="rate">Rate: $</label>
-					<input type="text" name="rate" id="rate">/day
-				</p>
-				<p>
-					<label for="description">description</label>
-					<textarea name="description" rows="8" cols="80" id="description"></textarea>
-				</p>
-				<p>
-					<label for="categories">Categories (check all that apply)</label>
-
-					<label><input type="checkbox" name="category" value="home tools">home tools</label>
-					<label><input type="checkbox" name="category" value="power tools">power tools</label>
-					<label><input type="checkbox" name="category" value="gardening">gardening</label>
-					<label><input type="checkbox" name="category" value="automechanics">automechanics</label>
-					<label><input type="checkbox" name="category" value="carpentry">carpentry</label>
-					<label><input type="checkbox" name="category" value="plumbing">plumbing</label>
-					<label><input type="checkbox" name="category" value="metal-working">metal-working</label>
-				</p>
-				<p>
-					<label for="availability-start">Start</label>
-					<input type="date" name="availability-start" id="availability-start">
-					<label for="availability-end">End</label>
-					<input type="date" name="availability-end" id="availability-end">
-				</p>
-				<p>
-					<div class="current-image"><h6>current image:</h6><img src="" alt="default"></div>
-					<label for="image">Image URL</label>
-					<input type="file" name="image" id="image">
-				</p>
-				<p>
-					<input type="submit" id="button-submit">
+			<div class="form-container container">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Edit Tool Details</h3>
+					</div>
+					<div class="panel-body">
+						<form class="edit-form form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="tool-name">Tool Name</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" name="toolName" id="tool-name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="rate">Rate ($/day)</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" name="rate" id="rate">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="description">Description</label>
+								<div class="col-sm-10">
+									<textarea class="form-control" name="description" id="description"></textarea>
+								</div>
+							</div>
+							<div class="categories form-group">
+								<label class="col-sm-2 control-label">Categories</label>
+								<div class="col-sm-10">
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="home tools">home tools</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="power tools">power tools</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="gardening">gardening</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="automechanics">automechanics</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="carpentry">carpentry</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="plumbing">plumbing</label>
+									</div>
+									<div class="col-sm-5">
+										<label class="control-label"><input type="checkbox" name="category" value="metal-working">metal-working</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">Availability</label>
+								<div class="col-sm-10">
+									<div class="form-group col-sm-6">
+										<label class="col-sm-2 control-label" for="availability-start">Start</label>
+										<div class="col-sm-10 col-md-7">
+											<input class="form-control" type="date" name="availability-start" id="availability-start">
+										</div>
+									</div>
+									<div class="form-group col-sm-6">
+										<label class="col-sm-2 control-label" for="availability-end">End</label>
+										<div class="col-sm-10 col-md-7">
+											<input class="form-control" type="date" name="availability-end" id="availability-end">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">current image</label>
+								<div class="image-wrapper current-image">
+										<img src="" alt="current image">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label" for="image">Image URL</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="file" name="image" id="image">
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="button-wrapper">
+					<button type="submit" id="button-submit">Submit</button>
 					<button id="button-delete">Delete</button>
-				</p>
-			</form>
+				</div>
+			</div>
 		</main>
 	</div>
 	<footer>
 		<p>&copy; open toolbox</p>
 	</footer>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script
 	src="https://code.jquery.com/jquery-3.1.1.min.js"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

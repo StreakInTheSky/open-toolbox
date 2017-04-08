@@ -29,6 +29,14 @@ function displayListings(data) {
 }
 
 function bindEventHandlers() {
+	$('.results').on('click', '.not-working', function() {
+		$('.overlay').css('width', '100%');
+	})
+
+	$('.overlay').click(function() {
+		$(this).css('width', '0');
+	})
+
 	$('#image').on('change', function() {
 		if (this.files && this.files[0]) {
 			var reader = new FileReader()
@@ -224,6 +232,7 @@ function getAndDisplayListings() {
 	switch(window.location.pathname.split('/')[1]) {
 		case '':
 			getListings(displayListings, '?disabled=false');
+			$(".result-listing").addClass("not-working");
 			return
 		case 'my-listings':
 			getListings(displayListings);
@@ -233,7 +242,6 @@ function getAndDisplayListings() {
 			return
 	}
 }
-
 
 $(function() {
   getAndDisplayListings();

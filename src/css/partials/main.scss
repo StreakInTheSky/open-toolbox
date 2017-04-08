@@ -1,6 +1,6 @@
 main {
 	flex: auto;
-	padding: 20px;
+	padding: 10px 20px;
 
 	h2 {
 		margin-bottom: 15px;
@@ -18,6 +18,11 @@ main {
 			height: 200px;
 			border: 1px solid lightgray;
 
+			&:hover {
+				border-color: #40AAFF;
+				cursor: pointer;
+			}
+
 			.listing-row-one {
 				margin-bottom: 10px;
 
@@ -27,46 +32,17 @@ main {
 			}
 
 			.listing-row-two {
-				.image-wrapper {
-					margin-bottom: 10px;
-					width: 150px;
-					height: 100px;
-					overflow: hidden;
-					position: relative;
-
-					img {
-						width: 100%;
-						position: absolute;
-    				top: 50%;
-    				transform: translateY(-50%);
-					}
-
-				}
 
 				.description {
 					margin-bottom: 10px;
 				}
-
-				.button-wrapper {
-					display: flex;
-					justify-content: space-around;
-
-					button {
-						-webkit-appearance: none;
-				    border: none;
-				    background-color: transparent;
-				    padding: 5px;
-				    margin: 0 5px;
-				    box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
-				    font-size: 0.7em;
-					}
 
 				}
 			}
 		}
 
 		.disabled {
-			background-color: #AAA;
+			background-color: #BBB;
 
 			img {
 				opacity: .5;
@@ -74,14 +50,67 @@ main {
 		}
 	}
 
-	.edit-form {
+	.form-container {
 
-		.current-image {
-			width: 100px;
+		div {
+			margin: 5px 0;
+		}
 
-			img {
-				width: 100%;
+		.categories {
+			input {
+				margin-right: 10px;
 			}
 		}
+
+		.current-image {
+			border: 1px solid #AAA;
+			transform: translateX(20px)
+		}
+
+		.button-wrapper {
+
+			margin-top: 10px;
+
+			button {
+				font-size: 0.9em;
+			}
+		}
+	}
+
+.button-wrapper {
+	display: flex;
+	justify-content: space-around;
+
+	button {
+		-webkit-appearance: none;
+		border: none;
+		background-color: transparent;
+		padding: 5px;
+		margin: 0 5px;
+		box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
+		font-size: 0.7em;
+		transition: all 0.1s ease-in-out;
+
+		&:hover {
+			background-color: #FF3030;
+			color: #CCCCAA;
+			transition: all 0.1s ease-in-out;
+			cursor: pointer;
+		}
+	}
+}
+
+.image-wrapper {
+	margin-bottom: 10px;
+	width: 150px;
+	height: 100px;
+	overflow: hidden;
+	position: relative;
+
+	img {
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
 	}
 }

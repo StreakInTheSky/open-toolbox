@@ -1,16 +1,15 @@
 header {
-	position: fixed;
-	height: 50px;
+	margin: 25px 0;
 	width: 100%;
 	top: 0;
 	left: 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	box-shadow: 0 0 2px 2px rgba(0,0,0,0.4);
-	padding: 0 100px;
+	// box-shadow: 0 0 2px 2px rgba(0,0,0,0.4);
+	padding: 5px 10px;
 	box-sizing: border-box;
-	background-color: lightgray;
+	background-color: #FFF;
 
 	h1 {
 		flex: 1;
@@ -34,12 +33,22 @@ header {
 			position: absolute;
 			top: 50%;
 			right: 0;
-			transform: translate(100%, -50%);
+			transform: translate(110%, -50%);
 		}
 	}
 
 	a {
 		flex: 1;
+		margin: 0 20px;
 		text-align: right;
+		text-decoration: none;
+		color: #666;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			color: red;
+			text-decoration: underline;
+			transition: all 0.3s ease-in-out;
+		}
 	}
 }

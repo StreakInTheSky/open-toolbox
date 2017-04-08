@@ -1,7 +1,8 @@
 aside {
 	background-color: white;
-	padding: 20px 0;
-	border-right: 1px solid black;
+	margin-top: 5px;
+	border-right: 1px solid lightgrey;
+	border-top: 1px solid lightgrey;
 
 	h3, h4 {
 		margin: 0 20px;
@@ -20,8 +21,8 @@ aside {
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
-			background-color: lightgray;
-			color: green;
+			background-color: #CCCCAA;
+			color: #FF3030;
 			transition: all 0.3s ease-in-out;
 			cursor: pointer;
 		}
@@ -31,6 +32,7 @@ aside {
 		margin-bottom: 20px;
 
 		li {
+			padding: 10px 20px;
 			font-weight: bold;
 		}
 	}
