@@ -90,7 +90,7 @@ h4 {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1; }
   .overlay .pop-up {
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
     height: 200px;
     width: 250px;
@@ -98,8 +98,8 @@ h4 {
     background-color: #FFF;
     box-shadow: 2px rgba(0, 0, 0, 0.4);
     top: 50%;
-    right: 0;
-    transform: translate(-100%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center; }
     .overlay .pop-up p {
       position: relative;
