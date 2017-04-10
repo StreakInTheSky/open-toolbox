@@ -28,15 +28,26 @@ function displayListings(data) {
   }
 }
 
+function capitalizeWords(str) {
+	return str.split(' ')
+						.map(function(word) {
+					    return word.charAt(0).toUpperCase() + word.slice(1);
+						})
+						.join(' ');
+}
+
 function filterListings(filter) {
 	$('ol.results').empty();
 
 	switch(window.location.pathname.split('/')[1]) {
 		case '':
 			getListings(displayListings, '?disabled=false&category=' + encodeURI(filter));
+			var newH2 = capitalizeWords(filter);
+			$("main h2").text(newH2);
 			return
 		case 'my-listings':
 			getListings(displayListings, '?category=' + encodeURI(filter));
+			$("main h2").text('My Listings - ' + filter);
 			return
 	}
 }
@@ -254,8 +265,13 @@ function bindEventHandlers() {
 		if($(this).attr('id') === 'show-all') {
 			$('ol.results').empty();
 			getAndDisplayListings();
+			if (window.location.pathname.split('/')[1] === "") {
+				$('main h2').text('All Listings');
+			} else {
+				$('main h2').text('My Listings');
+			}
 		} else {
-			filterListings([$(this).attr('id').replace(/\-/, ' ')]);
+			filterListings($(this).attr('id').replace(/\-/, ' '));
 		}
 	})
 
