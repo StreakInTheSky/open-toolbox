@@ -11,6 +11,17 @@ header {
 	box-sizing: border-box;
 	background-color: #FFF;
 
+	a {
+		color: #666;
+		text-decoration: none;
+		transition: all 0.3s ease-in-out;
+
+		&:hover {
+			color: #FF3030;
+			transition: all 0.3s ease-in-out;
+		}
+	}
+
 	h1 {
 		flex: 1;
 		color: gray;
@@ -18,37 +29,43 @@ header {
 		a {
 			color: gray;
 			text-decoration: none;
+
+			&:hover {
+
+				text-decoration: none;
+			}
 		}
 	}
 
 	form {
 		flex: auto;
 		position: relative;
+		height: 100%;
 
 		input {
 		 width: 100%;
+		 height: 100%;
 		}
 
 		button {
 			position: absolute;
 			top: 50%;
 			right: 0;
-			transform: translate(110%, -50%);
+			transform: translate(10%, -50%);
+			border: 1px solid lightgray;
+			background-color: #FFF;
 		}
 	}
 
-	a {
+	.nav-account {
 		flex: 1;
-		margin: 0 20px;
+		margin: 0 25px;
 		text-align: right;
-		text-decoration: none;
-		color: #666;
-		transition: all 0.3s ease-in-out;
 
-		&:hover {
-			color: red;
-			text-decoration: underline;
-			transition: all 0.3s ease-in-out;
+		a {
+				&:hover {
+				text-decoration: underline;
+			}
 		}
 	}
 }

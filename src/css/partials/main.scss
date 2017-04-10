@@ -6,6 +6,7 @@ main {
 		margin-bottom: 15px;
 	}
 
+	// styles for item listings
 	.results {
 		display: flex;
 		flex-wrap: wrap;
@@ -14,13 +15,26 @@ main {
 			margin-right: 10px;
 			margin-bottom: 10px;
 			padding: 10px;
-			width: 150px;
-			height: 200px;
+			width: 200px;
+			height: 250px;
 			border: 1px solid lightgray;
+			transition: all 0.1s ease-in-out;
+			overflow: hidden;
 
 			&:hover {
+				position: relative;
+				z-index: 1;
+				left: -2px;
+				top: -2px;
 				border-color: #40AAFF;
-				cursor: pointer;
+				box-shadow: 2px 2px 3px 2px rgba(0,0,0,0.2);
+				transition: border-color,box-shadow 0.1s ease-in-out;
+			}
+
+			* {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 
 			.listing-row-one {
@@ -32,11 +46,17 @@ main {
 			}
 
 			.listing-row-two {
-
 				.description {
+					height: 2em;
 					margin-bottom: 10px;
+					white-space: pre-line;
+					overflow: hidden;
+					text-overflow: ellipsis;
 				}
 
+				.image-wrapper {
+					width: 100%;
+					height: 125px;
 				}
 			}
 		}
@@ -50,6 +70,8 @@ main {
 		}
 	}
 
+
+	// style for listing forms
 	.form-container {
 
 		div {
@@ -60,6 +82,11 @@ main {
 			input {
 				margin-right: 10px;
 			}
+		}
+
+		.image-wrapper {
+			width: 150px;
+			height: 100px;
 		}
 
 		.current-image {
@@ -77,40 +104,44 @@ main {
 		}
 	}
 
-.button-wrapper {
-	display: flex;
-	justify-content: space-around;
+	// style for groups of buttons
+	.button-wrapper {
+		display: flex;
+		justify-content: space-around;
 
-	button {
-		-webkit-appearance: none;
-		border: none;
-		background-color: transparent;
-		padding: 5px;
-		margin: 0 5px;
-		box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
-		font-size: 0.7em;
-		transition: all 0.1s ease-in-out;
-
-		&:hover {
-			background-color: #FF3030;
-			color: #CCCCAA;
+		button {
+			-webkit-appearance: none;
+			border: none;
+			background-color: transparent;
+			padding: 5px;
+			margin: 0 5px;
+			box-shadow: 0 0 2px 0 rgba(0,0,0,0.2);
+			font-size: 0.7em;
 			transition: all 0.1s ease-in-out;
-			cursor: pointer;
+
+			&:hover {
+				background-color: #FF3030;
+				color: #CCCCAA;
+				transition: all 0.1s ease-in-out;
+				cursor: pointer;
+			}
 		}
 	}
-}
 
-.image-wrapper {
-	margin-bottom: 10px;
-	width: 150px;
-	height: 100px;
-	overflow: hidden;
-	position: relative;
+	// style for images
+	.image-wrapper {
+		margin-bottom: 10px;
+		// width: 150px;
+		// height: 100px;
+		overflow: hidden;
+		position: relative;
 
-	img {
-		width: 100%;
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+		img {
+			width: 100%;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
 	}
+
 }

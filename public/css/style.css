@@ -122,6 +122,13 @@ header {
   padding: 5px 10px;
   box-sizing: border-box;
   background-color: #FFF; }
+  header a {
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out; }
+    header a:hover {
+      color: #FF3030;
+      transition: all 0.3s ease-in-out; }
   header h1 {
     -ms-flex: 1;
         flex: 1;
@@ -129,29 +136,30 @@ header {
     header h1 a {
       color: gray;
       text-decoration: none; }
+      header h1 a:hover {
+        text-decoration: none; }
   header form {
     -ms-flex: auto;
         flex: auto;
-    position: relative; }
+    position: relative;
+    height: 100%; }
     header form input {
-      width: 100%; }
+      width: 100%;
+      height: 100%; }
     header form button {
       position: absolute;
       top: 50%;
       right: 0;
-      transform: translate(110%, -50%); }
-  header a {
+      transform: translate(10%, -50%);
+      border: 1px solid lightgray;
+      background-color: #FFF; }
+  header .nav-account {
     -ms-flex: 1;
         flex: 1;
-    margin: 0 20px;
-    text-align: right;
-    text-decoration: none;
-    color: #666;
-    transition: all 0.3s ease-in-out; }
-    header a:hover {
-      color: red;
-      text-decoration: underline;
-      transition: all 0.3s ease-in-out; }
+    margin: 0 25px;
+    text-align: right; }
+    header .nav-account a:hover {
+      text-decoration: underline; }
 
 aside {
   background-color: white;
@@ -194,73 +202,87 @@ main {
       margin-right: 10px;
       margin-bottom: 10px;
       padding: 10px;
-      width: 150px;
-      height: 200px;
-      border: 1px solid lightgray; }
+      width: 200px;
+      height: 250px;
+      border: 1px solid lightgray;
+      transition: all 0.1s ease-in-out;
+      overflow: hidden; }
       main .results .result-listing:hover {
+        position: relative;
+        z-index: 1;
+        left: -2px;
+        top: -2px;
         border-color: #40AAFF;
-        cursor: pointer; }
+        box-shadow: 2px 2px 3px 2px rgba(0, 0, 0, 0.2);
+        transition: border-color,box-shadow 0.1s ease-in-out; }
+      main .results .result-listing * {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
       main .results .result-listing .listing-row-one {
         margin-bottom: 10px; }
         main .results .result-listing .listing-row-one .rate {
           font-style: italic; }
       main .results .result-listing .listing-row-two .description {
-        margin-bottom: 10px; }
-  main .disabled {
-    background-color: #BBB; }
-    main .disabled img {
-      opacity: .5; }
-
-.form-container div {
-  margin: 5px 0; }
-
-.form-container .categories input {
-  margin-right: 10px; }
-
-.form-container .current-image {
-  border: 1px solid #AAA;
-  transform: translateX(20px); }
-
-.form-container .button-wrapper {
-  margin-top: 10px; }
-  .form-container .button-wrapper button {
-    font-size: 0.9em; }
-
-.button-wrapper {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around; }
-  .button-wrapper button {
-    -webkit-appearance: none;
-    border: none;
-    background-color: transparent;
-    padding: 5px;
-    margin: 0 5px;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
-    font-size: 0.7em;
-    transition: all 0.1s ease-in-out; }
-    .button-wrapper button:hover {
-      background-color: #FF3030;
-      color: #CCCCAA;
-      transition: all 0.1s ease-in-out;
-      cursor: pointer; }
-
-.image-wrapper {
-  margin-bottom: 10px;
-  width: 150px;
-  height: 100px;
-  overflow: hidden;
-  position: relative; }
-  .image-wrapper img {
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); }
+        height: 2em;
+        margin-bottom: 10px;
+        white-space: pre-line;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      main .results .result-listing .listing-row-two .image-wrapper {
+        width: 100%;
+        height: 125px; }
+    main .results .disabled {
+      background-color: #BBB; }
+      main .results .disabled img {
+        opacity: .5; }
+  main .form-container div {
+    margin: 5px 0; }
+  main .form-container .categories input {
+    margin-right: 10px; }
+  main .form-container .image-wrapper {
+    width: 150px;
+    height: 100px; }
+  main .form-container .current-image {
+    border: 1px solid #AAA;
+    transform: translateX(20px); }
+  main .form-container .button-wrapper {
+    margin-top: 10px; }
+    main .form-container .button-wrapper button {
+      font-size: 0.9em; }
+  main .button-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around; }
+    main .button-wrapper button {
+      -webkit-appearance: none;
+      border: none;
+      background-color: transparent;
+      padding: 5px;
+      margin: 0 5px;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+      font-size: 0.7em;
+      transition: all 0.1s ease-in-out; }
+      main .button-wrapper button:hover {
+        background-color: #FF3030;
+        color: #CCCCAA;
+        transition: all 0.1s ease-in-out;
+        cursor: pointer; }
+  main .image-wrapper {
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative; }
+    main .image-wrapper img {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); }
 
 footer {
   -ms-flex-item-align: end;
       align-self: flex-end;
+  position: relative;
   width: 100%;
   height: 50px;
   background-color: #CCA;
