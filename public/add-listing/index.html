@@ -9,7 +9,9 @@
 	<body>
 	<header>
 		<h1><a href="/">Open Toolbox</a></h1>
-		<a href="/my-listings">My Listings</a>
+		<nav class="nav-account">
+				<a href="/my-listings">My Listings</a>
+		</nav>
 	</header>
 	<div class="content">
 		<main>
@@ -23,23 +25,24 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="tool-name">Tool Name</label>
 								<div class="col-sm-10">
-									<input class="form-control" type="text" name="toolName" id="tool-name">
+									<input class="form-control" type="text" name="toolName" id="tool-name" placeholder="required" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="rate">Rate ($/day)</label>
 								<div class="col-sm-10">
-									<input class="form-control" type="text" name="rate" id="rate">
+									<input class="form-control" type="number" step="0.01" name="rate" id="rate" placeholder="required" required>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label" for="description">Description</label>
 								<div class="col-sm-10">
-									<textarea class="form-control" name="description" id="description"></textarea>
+									<textarea class="form-control" name="description" id="description" placeholder="required" required></textarea>
 								</div>
 							</div>
 							<div class="categories form-group">
-								<label class="col-sm-2 control-label">Categories</label>
+								<label class="col-sm-2 control-label">Categories<br>(Must select at least one)</label>
+								<!-- <p class="col-sm-10">(Must select at least one)</p> -->
 								<div class="col-sm-10">
 									<div class="col-sm-5">
 										<label class="control-label"><input type="checkbox" name="category" value="home tools">home tools</label>
@@ -87,11 +90,11 @@
 									<input class="form-control" type="file" name="image" id="image">
 								</div>
 							</div>
+							<div class="button-wrapper">
+								<button type="submit" id="button-submit">Submit</button>
+							</div>
 						</form>
 					</div>
-				</div>
-				<div class="button-wrapper">
-					<button type="submit" id="button-submit">Submit</button>
 				</div>
 			</div>
 		</main>
@@ -99,11 +102,12 @@
 	<footer>
 		<p>&copy; open toolbox</p>
 	</footer>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 	<script
 	src="https://code.jquery.com/jquery-3.1.1.min.js"
 	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="../js/app.js"></script>
 </body>

@@ -82,8 +82,8 @@ app.get('/categories', (req, res) => {
 
 // GET queryable listings
 app.get('/tools', (req, res) => {
-    const filters = req.query;
-    const queryableFields = ['category', 'toolName'];
+    const filters = {};
+    const queryableFields = ['category', 'toolName', 'disabled'];
     queryableFields.forEach(field => {
         if (req.query[field]) {
             filters[field] = req.query[field];

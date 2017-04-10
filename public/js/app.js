@@ -28,34 +28,162 @@ function displayListings(data) {
   }
 }
 
+function filterListings(filter) {
+	$('ol.results').empty();
+
+	switch(window.location.pathname.split('/')[1]) {
+		case '':
+			getListings(displayListings, '?disabled=false&category=' + encodeURI(filter));
+			return
+		case 'my-listings':
+			getListings(displayListings, '?category=' + encodeURI(filter));
+			return
+	}
+}
+
+function getListingItem(callbackFn) {
+	$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
+		callbackFn(data);
+	});
+}
+
+function populateEdit(data) {
+	state.id = data.id;
+	state['availability-start'] = moment(data.availability.start).format("YYYY-MM-DD")
+	state['availability-end'] = moment(data.availability.end).format("YYYY-MM-DD")
+	$('#tool-name').val(data.toolName);
+	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
+	$('#description').val(data.description);
+	$('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
+	$('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
+	$('.current-image img').attr('src', data.image);
+	data.category.forEach(function(item) {
+		$('.edit-form input[value="' + item + '"]').attr("checked", true);
+	})
+}
+
+// updates state when input detected in form fields
+function detectFieldChange() {
+	$(".edit-form :input").change(function(){
+		var input = $(this).attr('name');
+
+		if (input === 'category') {
+			return state[input] = $("input[name='category']:checked").map(function(){return $(this).val()}).get()
+		}
+		 state[input] = $(this).val();
+	})
+}
+
+function submitData(method, data) {
+	var url;
+
+	const requiredFields = ['tool-name', 'rate', 'description'];
+
+	var missingFields = 0;
+	requiredFields.forEach(function(field) {
+		if ($('#' + field).val().length === 0) {
+			// $('#' + field).after('<span style="color:red">*required</span>');
+			missingFields++;
+		}
+	})
+
+	if ($('input[name=category]:checked').length === 0) {
+		alert("Please select at least one category");
+		missingFields++;
+	}
+
+	if (missingFields > 0) {
+		return;
+	}
+
+	// change url depending on page
+	if (method === "PUT") {
+		url = apiBase + '/' + data.id;
+	} else if (method === "POST"){
+		url = apiBase;
+	}
+
+	if (data.rate) {
+		data.rate *= 100;
+	}
+
+	Object.assign(data, {
+		availability: {
+			start: data['availability-start'] ? data['availability-start'] : moment().format("YYYY-MM-DD"),
+			end: data['availability-end'] ? data['availability-end'] : moment().add(1, 'days').format("YYYY-MM-DD")
+		},
+	})
+
+	delete data['availability-start'];
+	delete data['availability-end'];
+
+	var submitSettings = {
+			url: url,
+			method: method,
+			data: JSON.stringify(data),
+			dataType: 'json',
+			contentType: 'application/json; charset=utf-8',
+			success: function() {
+									if (window.location.pathname.split('/')[1] === 'add-listing') {
+										window.location.pathname = '/my-listings';
+									} else {
+										location.reload();
+									}
+							 }
+	};
+
+	$.ajax(submitSettings);
+}
+
+// this function can stay the same even when we
+// are connecting to real API
+function getAndDisplayListings() {
+	switch(window.location.pathname.split('/')[1]) {
+		case '':
+			getListings(displayListings, '?disabled=false');
+			$(".result-listing")
+				.addClass("not-working")
+				.css("cursor", "pointer");
+			return
+		case 'my-listings':
+			getListings(displayListings);
+			return
+		case 'edit-listing':
+			getListingItem(populateEdit);
+			return
+	}
+}
+
 function bindEventHandlers() {
+
+	// Shows overlay and pop-up when a non working feature is invoked.
 	$('.results').on('click', '.not-working', function() {
 		$('.overlay').css('width', '100%');
 	})
 
+	// Closes overlay and pop-up
 	$('.overlay').click(function() {
 		$(this).css('width', '0');
 	})
 
+	// Handles uploading of new image
 	$('#image').on('change', function() {
 		if (this.files && this.files[0]) {
 			var reader = new FileReader()
 			reader.addEventListener('load', function(event) {
-				console.log(event.target.result);
-				$('.current-image img').attr('src', event.target.result)
 				state.image = event.target.result;
 			})
 		}
 		reader.readAsDataURL(this.files[0])
 	})
 
-	// Add new listing
+	// Go to add listing page
 	$('#add-new').click(function(event){
 		event.preventDefault();
 		window.location.pathname = '/add-listing/';
 	})
 
-	// Edit-button handler
+	// Goes to edit page when edit button is clicked
 	$('.edit-form').on('submit', function(event) {
 		event.preventDefault();
 	})
@@ -131,6 +259,7 @@ function bindEventHandlers() {
 		}
 	})
 
+	// Handles sumbiting data
 	$('#button-submit').click(function(){
 		var method;
 		switch(window.location.pathname.split('/')[1]) {
@@ -141,106 +270,9 @@ function bindEventHandlers() {
 			case 'add-listing':
 				method = "POST"
 				submitData(method, state);
-				window.location.pathname = 'my-listings';
+				return;
 		}
 	})
-}
-
-function submitData(method, data) {
-	var url;
-
-	// change url depending on page
-	if (method === "PUT") {
-		url = apiBase + '/' + data.id;
-	} else {
-		url = apiBase;
-	}
-
-	Object.assign(data, {
-		availability: {
-			start: data['availability-start'] ? data['availability-start'] : moment().format("YYYY-MM-DD"),
-			end: data['availability-end'] ? data['availability-end'] : moment().add(1, 'days').format("YYYY-MM-DD")
-		},
-		rate: data.rate * 100
-	})
-
-	delete data['availability-start'];
-	delete data['availability-end'];
-
-	var submitSettings = {
-			url: url,
-			method: method,
-			data: JSON.stringify(data),
-			dataType: 'json',
-			contentType: 'application/json; charset=utf-8'
-	};
-
-	$.ajax(submitSettings);
-	location.reload();
-}
-
-function populateEdit(data) {
-	state.id = data.id;
-	state['availability-start'] = moment(data.availability.start).format("YYYY-MM-DD")
-	state['availability-end'] = moment(data.availability.end).format("YYYY-MM-DD")
-	$('#tool-name').val(data.toolName);
-	$('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
-	$('#description').val(data.description);
-	$('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
-	$('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
-	$('.current-image img').attr('src', data.image);
-	data.category.forEach(function(item) {
-		$('.edit-form input[value="' + item + '"]').attr("checked", true);
-	})
-}
-
-function detectFieldChange() {
-	$(".edit-form :input").change(function(){
-		var input = $(this).attr('name');
-
-		if (input === 'category') {
-			return state[input] = $("input[name='category']:checked").map(function(){return $(this).val()}).get()
-		}
-		 state[input] = $(this).val();
-	})
-}
-
-function getListingItem() {
-	$(window).on('load', function(){
-		$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
-			populateEdit(data);
-		});
-	})
-}
-
-function filterListings(filter) {
-	$('ol.results').empty();
-
-	switch(window.location.pathname.split('/')[1]) {
-		case '':
-			getListings(displayListings, '?disabled=false&category=' + encodeURI(filter));
-			return
-		case 'my-listings':
-			getListings(displayListings, '?category=' + encodeURI(filter));
-			return
-	}
-}
-
-// this function can stay the same even when we
-// are connecting to real API
-function getAndDisplayListings() {
-	switch(window.location.pathname.split('/')[1]) {
-		case '':
-			getListings(displayListings, '?disabled=false');
-			$(".result-listing").addClass("not-working");
-			return
-		case 'my-listings':
-			getListings(displayListings);
-			return
-		case 'edit-listing':
-			getListingItem()
-			return
-	}
 }
 
 $(function() {
