@@ -37,11 +37,20 @@ header {
 					text-decoration: none;
 				}
 			}
+
 		}
+	i {
+		display: none;
+	}
+
+	.go-back {
+		display: none;
+	}
 
 	}
 
 	.search-bar {
+		display: none;
 		flex: auto;
 		position: relative;
 
@@ -59,7 +68,7 @@ header {
 		}
 	}
 
-	.account-links {
+	.link-to-my-listings {
 		flex: 1;
 		margin: 0 25px;
 		text-align: right;
@@ -72,7 +81,7 @@ header {
 	}
 }
 
-@media only screen and (max-width: 502px) {
+@media only screen and (max-width: 767px) {
 	header {
 		display: -webkit-flex;
 		display: flex;
@@ -82,7 +91,41 @@ header {
 		background-color:	#FFF;
 		margin-top: 0;
 		margin-bottom: 20px;
-		z-index: 100;
+		z-index: 3;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 60px;
+
+			.logo {
+				position: relative;
+
+				i {
+					display: block;
+					position: absolute;
+					right: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					font-size: 1.5em;
+					padding: 10px;
+				}
+
+				.go-back {
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					font-size: 1.5em;
+					padding: 10px;
+				}
+			}
+
+			.account-links {
+				display: none;
+			}
+
 
 			div {
 				width: 100%;

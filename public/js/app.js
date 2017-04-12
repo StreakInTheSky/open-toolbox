@@ -289,6 +289,11 @@ function bindEventHandlers() {
 				return;
 		}
 	})
+
+	// toggles aside on mobile
+	$('.logo i').click(function() {
+		$("aside").toggleClass("is-open");
+	})
 }
 
 $(function() {
