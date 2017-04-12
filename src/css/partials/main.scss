@@ -144,3 +144,24 @@ main {
 	}
 
 }
+
+@media only screen and (max-width: 502px) {
+	main {
+		width: 90%;
+
+		.results {
+			// width: 100%;
+
+			.result-listing {
+				margin: auto;
+				margin-bottom: 10px;
+				width: 100%;
+				.listing-row-two {
+					.image-wrapper {
+						height: 250px;
+					}
+				}
+			}
+		}
+	}
+}

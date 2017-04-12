@@ -108,6 +108,10 @@ h4 {
       right: 0;
       transform: translate(0, -100%); }
 
+@media only screen and (max-width: 502px) {
+  .content {
+    margin-top: 50px; } }
+
 header {
   margin: 25px 0;
   width: 100%;
@@ -129,37 +133,53 @@ header {
     header a:hover {
       color: #FF3030;
       transition: all 0.3s ease-in-out; }
-  header h1 {
+  header .logo {
     -ms-flex: 1;
-        flex: 1;
-    color: gray; }
-    header h1 a {
-      color: gray;
-      text-decoration: none; }
-      header h1 a:hover {
+        flex: 1; }
+    header .logo h1 {
+      color: gray; }
+      header .logo h1 a {
+        color: gray;
         text-decoration: none; }
-  header form {
+        header .logo h1 a:hover {
+          text-decoration: none; }
+  header .search-bar {
     -ms-flex: auto;
         flex: auto;
-    position: relative;
-    height: 100%; }
-    header form input {
-      width: 100%;
-      height: 100%; }
-    header form button {
+    position: relative; }
+    header .search-bar input {
+      width: 100%; }
+    header .search-bar button {
       position: absolute;
       top: 50%;
       right: 0;
       transform: translate(10%, -50%);
       border: 1px solid lightgray;
       background-color: #FFF; }
-  header .nav-account {
+  header .account-links {
     -ms-flex: 1;
         flex: 1;
     margin: 0 25px;
     text-align: right; }
-    header .nav-account a:hover {
+    header .account-links a:hover {
       text-decoration: underline; }
+
+@media only screen and (max-width: 502px) {
+  header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    background-color: #FFF;
+    margin-top: 0;
+    margin-bottom: 20px;
+    z-index: 100; }
+    header div {
+      width: 100%;
+      text-align: center;
+      margin: 10px 0; } }
 
 aside {
   background-color: white;
@@ -174,7 +194,7 @@ aside {
   aside h4 {
     margin-bottom: 10px; }
   aside li {
-    padding: 5px 20px;
+    padding: 10px 20px;
     transition: all 0.3s ease-in-out; }
     aside li:hover {
       background-color: #CCCCAA;
@@ -186,6 +206,15 @@ aside {
     aside .my-listings-buttons li {
       padding: 10px 20px;
       font-weight: bold; }
+
+@media only screen and (max-width: 637px) {
+  aside {
+    display: none; }
+    aside li {
+      padding: 20px;
+      border-bottom: 1px solid #CCCCAA; }
+    aside .my-listings-buttons li {
+      padding: 20px; } }
 
 main {
   -ms-flex: auto;
@@ -203,7 +232,6 @@ main {
       margin-bottom: 10px;
       padding: 10px;
       width: 200px;
-      height: 250px;
       border: 1px solid lightgray;
       transition: all 0.1s ease-in-out;
       overflow: hidden; }
@@ -224,11 +252,7 @@ main {
         main .results .result-listing .listing-row-one .rate {
           font-style: italic; }
       main .results .result-listing .listing-row-two .description {
-        height: 2em;
-        margin-bottom: 10px;
-        white-space: pre-line;
-        overflow: hidden;
-        text-overflow: ellipsis; }
+        margin-bottom: 10px; }
       main .results .result-listing .listing-row-two .image-wrapper {
         width: 100%;
         height: 125px; }
@@ -279,11 +303,21 @@ main {
       top: 50%;
       transform: translateY(-50%); }
 
+@media only screen and (max-width: 502px) {
+  main {
+    width: 90%; }
+    main .results .result-listing {
+      margin: auto;
+      margin-bottom: 10px;
+      width: 100%; }
+      main .results .result-listing .listing-row-two .image-wrapper {
+        height: 250px; } }
+
 footer {
   -ms-flex-item-align: end;
       align-self: flex-end;
-  position: relative;
   width: 100%;
   height: 50px;
   background-color: #CCA;
-  color: #FF3030; }
+  color: #FF3030;
+  padding: 5px 20px; }

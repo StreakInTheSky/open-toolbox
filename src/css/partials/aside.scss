@@ -18,7 +18,7 @@ aside {
 	}
 
 	li {
-		padding: 5px 20px;
+		padding: 10px 20px;
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
@@ -35,6 +35,23 @@ aside {
 		li {
 			padding: 10px 20px;
 			font-weight: bold;
+		}
+	}
+}
+
+@media only screen and (max-width: 637px) {
+	aside {
+		display: none;
+
+		li {
+			padding: 20px;
+			border-bottom: 1px solid #CCCCAA;
+		}
+
+		.my-listings-buttons {
+			li {
+				padding: 20px;
+			}
 		}
 	}
 }
