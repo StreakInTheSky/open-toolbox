@@ -69,6 +69,11 @@ h3 {
 h4 {
   font-size: 1.2em; }
 
+a {
+  text-decoration: none; }
+  a:hover {
+    color: #FF3030; }
+
 .content {
   display: -ms-flexbox;
   display: flex;
@@ -202,9 +207,12 @@ header {
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 1.5em;
+        font-size: 2em;
+        font-weight: bolder;
         padding: 10px; }
-    header .account-links {
+        header .logo .go-back:hover {
+          text-decoration: none; }
+    header .link-to-my-listings {
       display: none; }
     header div {
       width: 100%;
@@ -217,7 +225,6 @@ aside {
   border-right: 1px solid lightgrey;
   border-top: 1px solid lightgrey; }
   aside a {
-    text-decoration: none;
     color: #000; }
   aside h3, aside h4 {
     margin: 0 20px; }

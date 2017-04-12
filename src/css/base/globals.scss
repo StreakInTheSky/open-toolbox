@@ -32,11 +32,13 @@ h4 {
 	font-size: 1.2em;
 }
 
-// button {
-// 	&:hover {
-// 		cursor: pointer;
-// 	}
-// }
+a {
+	text-decoration: none;
+
+	&:hover {
+		color: #FF3030;
+	}
+}
 
 .content {
 	display: flex;

@@ -117,12 +117,17 @@ header {
 					left: 0;
 					top: 50%;
 					transform: translateY(-50%);
-					font-size: 1.5em;
+					font-size: 2em;
+					font-weight: bolder;
 					padding: 10px;
+
+					&:hover {
+						text-decoration: none;
+					}
 				}
 			}
 
-			.account-links {
+			.link-to-my-listings {
 				display: none;
 			}
 
