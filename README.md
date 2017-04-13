@@ -21,9 +21,10 @@ The edit listing and add new pages provide a form that includes all the necessar
 
 ### Technologies Used
 
-- HTML
-- CSS
+- HTML5
+- CSS3
+- SASS
 - Bootstrap
-- Javascript/Jquery/Ajax
-- Node.js/Express
-- Mongo.db/Mongoose
+- Javascript, Jquery, & Ajax
+- Node.js & Express
+- Mongo.db & Mongoose
