@@ -26,22 +26,10 @@ aside {
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
-			background-color: #CCCCAA;
-			color: #FF3030;
+			background-color: #DDB;
+			color: #40AAFF;
 			transition: all 0.3s ease-in-out;
 			cursor: pointer;
-		}
-	}
-
-	.my-listings-buttons {
-		margin-bottom: 15px;
-
-		li {
-			padding: 10px 20px;
-			font-weight: bold;
-
-			a {
-			}
 		}
 	}
 }
@@ -67,12 +55,6 @@ aside {
 
 	li {
 		padding: 20px;
-		border-bottom: 1px solid #CCCCAA;
-	}
-
-	.my-listings-buttons {
-		li {
-			padding: 10px 0;
-		}
+		border-bottom: 1px solid #DDB;
 	}
 }

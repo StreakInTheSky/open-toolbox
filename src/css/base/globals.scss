@@ -3,8 +3,6 @@ html {
 }
 
 body {
-	// margin-top: 50px;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	font-size: 15px;
@@ -36,7 +34,7 @@ a {
 	text-decoration: none;
 
 	&:hover {
-		color: #FF3030;
+		color: #40AAFF;
 	}
 }
 

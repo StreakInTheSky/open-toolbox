@@ -1,13 +1,12 @@
 header {
-	margin: 25px 0;
+	margin: 0;
 	width: 100%;
 	top: 0;
 	left: 0;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	// box-shadow: 0 0 2px 2px rgba(0,0,0,0.4);
-	padding: 5px 10px;
+	justify-content: flex-start;
+	align-items: baseline;
+	padding: 15px;
 	box-sizing: border-box;
 	background-color: #FFF;
 
@@ -17,35 +16,20 @@ header {
 		transition: all 0.3s ease-in-out;
 
 		&:hover {
-			color: #FF3030;
+			color: #40AAFF;
 			transition: all 0.3s ease-in-out;
 		}
 	}
 
 	.logo {
-		flex: 1;
 
-		h1 {
-			color: gray;
-
-			a {
-				color: gray;
-				text-decoration: none;
-
-				&:hover {
-
-					text-decoration: none;
-				}
-			}
-
+		i {
+			display: none;
 		}
-	i {
-		display: none;
-	}
 
-	.go-back {
-		display: none;
-	}
+		.go-back {
+			display: none;
+		}
 
 	}
 
@@ -68,10 +52,9 @@ header {
 		}
 	}
 
-	.link-to-my-listings {
-		flex: 1;
+	.account-links, .link-to-my-listings {
 		margin: 0 25px;
-		text-align: right;
+		font-weight: bold;
 
 		a {
 				&:hover {
@@ -81,11 +64,18 @@ header {
 	}
 }
 
+@media only screen and (min-width: 767px) {
+	header {
+		.logo {
+			border-right: 2px solid #DDB;
+			padding-right: 15px;
+		}
+	}
+}
+
 @media only screen and (max-width: 767px) {
 	header {
-		display: -webkit-flex;
 		display: flex;
-		-webkit-flex-direction: column;
 		flex-direction: column;
 		align-items: center;
 		background-color:	#FFF;
@@ -104,11 +94,19 @@ header {
 				i {
 					display: block;
 					position: absolute;
-					right: 0;
-					top: 50%;
-					transform: translateY(-50%);
 					font-size: 1.5em;
 					padding: 10px;
+					top: 50%;
+					transform: translateY(-50%);
+				}
+
+				i .fa-user, .fa-plus {
+					left: 0;
+
+				}
+
+				i.fa-bars {
+					right: 0;
 				}
 
 				.go-back {
@@ -125,6 +123,10 @@ header {
 						text-decoration: none;
 					}
 				}
+			}
+
+			.account-links {
+				display: none;
 			}
 
 			.link-to-my-listings {
