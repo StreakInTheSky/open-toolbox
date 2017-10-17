@@ -121,6 +121,12 @@ a {
       -webkit-transform: translate(0, -100%);
               transform: translate(0, -100%); }
 
+.ui-datepicker {
+  background-color: #FFF;
+  -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
+  padding: 5px; }
+
 @media only screen and (max-width: 767px) {
   .content {
     margin-top: 50px; } }
@@ -340,6 +346,35 @@ main {
       background-color: #BBB; }
       main .results .disabled img {
         opacity: .5; }
+  main .listing {
+    margin-top: 20px; }
+    main .listing .listing-top {
+      height: 200px; }
+      main .listing .listing-top .listing-image-wrapper {
+        display: inline-block;
+        width: 200px;
+        height: 200px; }
+      main .listing .listing-top .listing-details {
+        display: inline-block;
+        padding: 0 20px; }
+        main .listing .listing-top .listing-details p {
+          margin-bottom: 10px; }
+        main .listing .listing-top .listing-details button {
+          color: #40AAFF;
+          font-size: 1.3em;
+          padding-left: 20px;
+          padding-right: 20px;
+          -webkit-transition: all 0.1s ease-in-out;
+          transition: all 0.1s ease-in-out; }
+        main .listing .listing-top .listing-details button:hover {
+          color: #FFF;
+          -webkit-transition: all 0.1s ease-in-out;
+          transition: all 0.1s ease-in-out; }
+        main .listing .listing-top .listing-details .listing-price {
+          font-size: 1.5em; }
+    main .listing .listing-description {
+      margin-top: 20px;
+      width: 500px; }
   main .form-container div {
     margin: 5px 0; }
   main .form-container .categories input {

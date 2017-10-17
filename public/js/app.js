@@ -165,6 +165,7 @@ function getAndDisplayListings() {
 	}
 }
 
+
 function bindEventHandlers() {
 
 	// Shows overlay and pop-up when a non working feature is invoked.
@@ -297,6 +298,10 @@ function bindEventHandlers() {
 }
 
 $(function() {
+	if (window.location.pathname.split('/')[1] === 'listing') {		
+		$( "#start-datepicker" ).datepicker();
+		$( "#end-datepicker" ).datepicker();
+	}
   getAndDisplayListings();
 	bindEventHandlers();
 	detectFieldChange();
