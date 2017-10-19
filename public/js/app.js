@@ -54,7 +54,6 @@ function filterListings(filter) {
 
 function getListingItem(callback) {
 	$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
-		console.log(window.location.pathname.split('/')[2])
 		callback(data);
 	});
 }
@@ -148,20 +147,13 @@ function submitData(method, data) {
 }
 
 function populateListing(data) {
-	state.id = data.id;
-	console.log('Retrieved data:', data);
-	console.log('Put date in state:', state);
-	// state['availability-start'] = moment(data.availability.start).format("YYYY-MM-DD")
-	// state['availability-end'] = moment(data.availability.end).format("YYYY-MM-DD")
-	// $('#tool-name').val(data.toolName);
-	// $('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
-	// $('#description').val(data.description);
-	// $('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
-	// $('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
-	// $('.current-image img').attr('src', data.image);
-	// data.category.forEach(function(item) {
-	// 	$('.edit-form input[value="' + item + '"]').attr("checked", true);
-	// })
+	console.log(data)
+	$('.listing-title').text(data.toolName);
+	$('.listing-image-wrapper img').attr('src', data.image);
+	$('.listing-rate #rate').text((data.rate/Math.pow(10, 2)).toFixed(2));
+	$('.description').text(data.description);
+	$( "#start-datepicker" ).datepicker();
+	$( "#end-datepicker" ).datepicker();
 }
 
 // this function can stay the same even when we
@@ -334,10 +326,10 @@ function bindEventHandlers() {
 }
 
 $(function() {
-	if (window.location.pathname.split('/')[1] === 'listing') {
-		$( "#start-datepicker" ).datepicker();
-		$( "#end-datepicker" ).datepicker();
-	}
+	// if (window.location.pathname.split('/')[1] === 'listing') {
+	// 	$( "#start-datepicker" ).datepicker();
+	// 	$( "#end-datepicker" ).datepicker();
+	// }
   getAndDisplayListings();
 	bindEventHandlers();
 	detectFieldChange();

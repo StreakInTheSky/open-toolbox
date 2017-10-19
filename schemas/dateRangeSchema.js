@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const dateRangeSchema = mongoose.Schema({
-  start: String,
-  end: String
+  start: {type: Date},
+  end: {type: Date}
 })
 
 module.exports = dateRangeSchema;

@@ -338,7 +338,7 @@ main {
         main .results .result-listing .listing-row-one .rate {
           font-style: italic; }
       main .results .result-listing .listing-row-two .description {
-        margin-bottom: 10px; }
+        margin: 10px 0; }
       main .results .result-listing .listing-row-two .image-wrapper {
         width: 100%;
         height: 125px; }
@@ -348,30 +348,30 @@ main {
         opacity: .5; }
   main .listing {
     margin-top: 20px; }
-    main .listing .listing-top {
-      height: 200px; }
-      main .listing .listing-top .listing-image-wrapper {
-        display: inline-block;
-        width: 250px;
-        height: 250px; }
-      main .listing .listing-top .listing-details {
-        display: inline-block;
-        padding: 0 20px; }
-        main .listing .listing-top .listing-details p {
-          margin-bottom: 10px; }
-        main .listing .listing-top .listing-details button {
-          color: #40AAFF;
-          font-size: 1.3em;
-          padding-left: 20px;
-          padding-right: 20px;
-          -webkit-transition: all 0.1s ease-in-out;
-          transition: all 0.1s ease-in-out; }
-        main .listing .listing-top .listing-details button:hover {
-          color: #FFF;
-          -webkit-transition: all 0.1s ease-in-out;
-          transition: all 0.1s ease-in-out; }
-        main .listing .listing-top .listing-details .listing-price {
-          font-size: 1.5em; }
+    main .listing .listing-top .listing-image-wrapper {
+      display: inline-block;
+      width: 250px;
+      height: 250px;
+      border: 1px solid rgba(160, 160, 160, 0.5); }
+    main .listing .listing-top .listing-details {
+      display: inline-block;
+      padding: 0 20px;
+      vertical-align: top; }
+      main .listing .listing-top .listing-details p {
+        margin-bottom: 10px; }
+      main .listing .listing-top .listing-details button {
+        color: #40AAFF;
+        font-size: 1.3em;
+        padding-left: 20px;
+        padding-right: 20px;
+        -webkit-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out; }
+      main .listing .listing-top .listing-details button:hover {
+        color: #FFF;
+        -webkit-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out; }
+      main .listing .listing-top .listing-details .listing-rate {
+        font-size: 1.5em; }
     main .listing .listing-description {
       margin-top: 20px;
       width: 500px; }
@@ -414,7 +414,6 @@ main {
         transition: all 0.1s ease-in-out;
         cursor: pointer; }
   main .image-wrapper {
-    margin-bottom: 10px;
     overflow: hidden;
     position: relative; }
     main .image-wrapper img {
