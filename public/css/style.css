@@ -121,12 +121,6 @@ a {
       -webkit-transform: translate(0, -100%);
               transform: translate(0, -100%); }
 
-.ui-datepicker {
-  background-color: #FFF;
-  -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.2);
-  padding: 5px; }
-
 @media only screen and (max-width: 767px) {
   .content {
     margin-top: 50px; } }
