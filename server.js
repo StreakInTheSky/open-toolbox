@@ -19,6 +19,10 @@ app.get('/edit-listing/:itemId', (req, res) => {
 	res.cookie('item-id', req.params.itemId);
 	res.sendFile(path.resolve(__dirname, 'public/edit-listing/index.html'));
 })
+app.get('/listing/:itemId', (req, res) => {
+	res.cookie('item-id', req.params.itemId);
+	res.sendFile(path.resolve(__dirname, 'public/listing/index.html'));
+})
 // END WEB
 
 // API

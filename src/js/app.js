@@ -52,9 +52,10 @@ function filterListings(filter) {
 	}
 }
 
-function getListingItem(callbackFn) {
+function getListingItem(callback) {
 	$.getJSON(apiBase + '/' + window.location.pathname.split('/')[2]).done(function(data) {
-		callbackFn(data);
+		console.log(window.location.pathname.split('/')[2])
+		callback(data);
 	});
 }
 
@@ -146,6 +147,23 @@ function submitData(method, data) {
 	$.ajax(submitSettings);
 }
 
+function populateListing(data) {
+	state.id = data.id;
+	console.log('Retrieved data:', data);
+	console.log('Put date in state:', state);
+	// state['availability-start'] = moment(data.availability.start).format("YYYY-MM-DD")
+	// state['availability-end'] = moment(data.availability.end).format("YYYY-MM-DD")
+	// $('#tool-name').val(data.toolName);
+	// $('#rate').val((data.rate/Math.pow(10, 2)).toFixed(2));
+	// $('#description').val(data.description);
+	// $('#availability-start').val(moment(data.availability.start).format("YYYY-MM-DD"));
+	// $('#availability-end').val(moment(data.availability.end).format("YYYY-MM-DD"));
+	// $('.current-image img').attr('src', data.image);
+	// data.category.forEach(function(item) {
+	// 	$('.edit-form input[value="' + item + '"]').attr("checked", true);
+	// })
+}
+
 // this function can stay the same even when we
 // are connecting to real API
 function getAndDisplayListings() {
@@ -162,20 +180,37 @@ function getAndDisplayListings() {
 		case 'edit-listing':
 			getListingItem(populateEdit);
 			return
+		case 'listing':
+			getListingItem(populateListing);
+			return
 	}
 }
 
 
 function bindEventHandlers() {
 
-	// Shows overlay and pop-up when a non working feature is invoked.
-	$('.results').on('click', '.not-working', function() {
-		$('.overlay').css('width', '100%');
-	})
+	// // Shows overlay and pop-up when a non working feature is invoked.
+	// $('.results').on('click', '.not-working', function() {
+	// 	$('.overlay').css('width', '100%');
+	// })
 
-	// Closes overlay and pop-up
-	$('.overlay').click(function() {
-		$(this).css('width', '0');
+	// // Closes overlay and pop-up
+	// $('.overlay').click(function() {
+	// 	$(this).css('width', '0');
+	// })
+
+	// Goes to listing page when clicking listing card
+	$('.results').on('click', '.result-listing:not(.my-listing)', function(){
+		var listingId = $(this).closest('.result-listing').data('id');
+		window.location.pathname = '/listing/' + listingId;
+	})
+	$('.results').on('click', '.tool-name', function(){
+		var listingId = $(this).closest('.result-listing').data('id');
+		window.location.pathname = '/listing/' + listingId;
+	})
+	$('.results').on('click', '.result-listing .image-wrapper', function(){
+		var listingId = $(this).closest('.result-listing').data('id');
+		window.location.pathname = '/listing/' + listingId;
 	})
 
 	// Handles uploading of new image
@@ -195,10 +230,11 @@ function bindEventHandlers() {
 		window.location.pathname = '/add-listing/';
 	})
 
-	// Goes to edit page when edit button is clicked
 	$('.edit-form').on('submit', function(event) {
 		event.preventDefault();
 	})
+
+	// Goes to edit page when edit button is clicked
 	$('.results').on('click', '.button-edit', function() {
 		var listingId = $(this).closest('.result-listing').data('id');
 		window.location.pathname = '/edit-listing/' + listingId;
@@ -298,7 +334,7 @@ function bindEventHandlers() {
 }
 
 $(function() {
-	if (window.location.pathname.split('/')[1] === 'listing') {		
+	if (window.location.pathname.split('/')[1] === 'listing') {
 		$( "#start-datepicker" ).datepicker();
 		$( "#end-datepicker" ).datepicker();
 	}
