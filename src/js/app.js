@@ -121,7 +121,7 @@ function submitData(method, data) {
 	Object.assign(data, {
 		availability: {
 			start: data['availability-start'] ? data['availability-start'] : moment().format("YYYY-MM-DD"),
-			end: data['availability-end'] ? data['availability-end'] : moment().add(1, 'days').format("YYYY-MM-DD")
+			end: data['availability-end'] ? data['availability-end'] : null
 		},
 	})
 
@@ -148,12 +148,23 @@ function submitData(method, data) {
 
 function populateListing(data) {
 	console.log(data)
+	var startDate = data.availability.start
+	var endDate = data.availability.end
+	console.log(typeof startDate)
+	console.log('start date:', startDate)
+	console.log('end date:', endDate)
 	$('.listing-title').text(data.toolName);
 	$('.listing-image-wrapper img').attr('src', data.image);
 	$('.listing-rate #rate').text((data.rate/Math.pow(10, 2)).toFixed(2));
 	$('.description').text(data.description);
-	$( "#start-datepicker" ).datepicker();
-	$( "#end-datepicker" ).datepicker();
+	$( "#start-datepicker" ).datepicker({
+		minDate: new Date(startDate),
+		maxDate: new Date(endDate)
+	});
+	$( "#end-datepicker" ).datepicker({
+		minDate: new Date(startDate),
+		maxDate: new Date(endDate)
+	});
 }
 
 // this function can stay the same even when we
