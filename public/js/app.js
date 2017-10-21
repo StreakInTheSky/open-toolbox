@@ -177,7 +177,6 @@ function getAndDisplayListings() {
 		case '':
 			getListings(displayListings, '?disabled=false');
 			$(".result-listing")
-				.addClass("not-working")
 				.css("cursor", "pointer");
 			return
 		case 'my-listings':
@@ -195,15 +194,15 @@ function getAndDisplayListings() {
 
 function bindEventHandlers() {
 
-	// // Shows overlay and pop-up when a non working feature is invoked.
-	// $('.results').on('click', '.not-working', function() {
-	// 	$('.overlay').css('width', '100%');
-	// })
+	// Shows overlay and pop-up when a non working feature is invoked.
+	$('.not-working').on('click', function() {
+		$('.overlay').css('width', '100%');
+	})
 
-	// // Closes overlay and pop-up
-	// $('.overlay').click(function() {
-	// 	$(this).css('width', '0');
-	// })
+	// Closes overlay and pop-up
+	$('.overlay').click(function() {
+		$(this).css('width', '0');
+	})
 
 	// Goes to listing page when clicking listing card
 	$('.results').on('click', '.result-listing:not(.my-listing)', function(){
@@ -331,6 +330,10 @@ function bindEventHandlers() {
 				submitData(method, state);
 				return;
 		}
+	})
+
+	$('.button-rent').click(function(event) {
+		event.preventDefault();
 	})
 
 	// toggles aside on mobile
