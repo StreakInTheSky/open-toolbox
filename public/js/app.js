@@ -147,7 +147,6 @@ function submitData(method, data) {
 }
 
 function populateListing(data) {
-	console.log(data)
 	var endDatePickerOptions = {
 		minDate: new Date(data.userStart),
 		maxDate: new Date(data.userEnd)
@@ -262,7 +261,7 @@ function bindEventHandlers() {
 			dataType: 'json',
 			contentType: 'application/json; charset=utf-8'
 		};
-		console.log(disabledSettings);
+
 		$.ajax(apiBase + '/' + listingId, disabledSettings)
 	})
 
@@ -343,10 +342,6 @@ function bindEventHandlers() {
 }
 
 $(function() {
-	// if (window.location.pathname.split('/')[1] === 'listing') {
-	// 	$( "#start-datepicker" ).datepicker();
-	// 	$( "#end-datepicker" ).datepicker();
-	// }
   getAndDisplayListings();
 	bindEventHandlers();
 	detectFieldChange();
