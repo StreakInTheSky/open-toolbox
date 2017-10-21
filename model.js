@@ -28,6 +28,15 @@ const toolSchema = mongoose.Schema({
 //   return gradeObj.grade;
 // });
 
+function computeUserStart(date) {
+	var givenDate = new Date(date);
+	if (givenDate < new Date()) {
+		return new Date();
+	} else {
+		return givenDate;
+	}
+}
+
 toolSchema.methods.apiRepr = function() {
   return {
     id: this._id,
@@ -39,6 +48,7 @@ toolSchema.methods.apiRepr = function() {
   	rate: this.rate,
   	datePosted: this.datePosted,
   	availability: this.availability,
+		userStart: computeUserStart(this.availability.start),
 		rentedDates: this.rentedDates,
   	image: this.image
   }
