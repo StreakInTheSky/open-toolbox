@@ -148,6 +148,16 @@ function submitData(method, data) {
 
 function populateListing(data) {
 	console.log(data)
+	var endDatePickerOptions = {
+		minDate: new Date(data.userStart),
+		maxDate: new Date(data.userEnd)
+	}
+
+	$('#start-datepicker').change(function() {
+		endDatePickerOptions.minDate = new Date($('#start-datepicker').val());
+		$( "#end-datepicker" ).datepicker('destroy');
+		$( "#end-datepicker" ).datepicker(endDatePickerOptions);
+	})
 
 	$('.listing-title').text(data.toolName);
 	$('.listing-image-wrapper img').attr('src', data.image);
@@ -157,10 +167,7 @@ function populateListing(data) {
 		minDate: new Date(data.userStart),
 		maxDate: new Date(data.userEnd)
 	});
-	$( "#end-datepicker" ).datepicker({
-		minDate: new Date(data.userStart),
-		maxDate: new Date(data.userEnd)
-	});
+	$( "#end-datepicker" ).datepicker(endDatePickerOptions);
 }
 
 // this function can stay the same even when we
