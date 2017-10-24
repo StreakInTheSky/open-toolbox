@@ -161,7 +161,7 @@ function populateListing(data) {
 	$('.listing-title').text(data.toolName);
 	$('.listing-image-wrapper img').attr('src', data.image);
 	$('.listing-rate #rate').text((data.rate/Math.pow(10, 2)).toFixed(2));
-	$('.description').text(data.description);
+	$('.listing-description').text(data.description);
 	$( "#start-datepicker" ).datepicker({
 		minDate: new Date(data.userStart),
 		maxDate: new Date(data.userEnd)
